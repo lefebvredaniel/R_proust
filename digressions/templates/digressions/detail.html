@@ -1,0 +1,39 @@
+{% extends 'digressions/base.html' %}
+{% block content %}
+
+{% for nom_etiq in nom_etiquette %}
+<div class="container">
+	
+    <div class="text-center">
+		<div class="text-primary"><h2>{{nom_etiq}}</h2>
+		</div>
+	</div>   
+</div>
+   
+{% endfor %}
+
+
+
+{% if etiquettes_list %}
+
+		
+	{% for etiq in etiquettes_list %} 	
+	<ul class="list-unstyled">
+
+	<h3><a href="/digressions/{{etiq.extraits_id.id}}/contenu">{{etiq.extraits_id.extraits_titre }} </a></h3>
+
+	  	
+		<div class="jumbotron">
+	 <li><p style="font-family:verdana;font-size:100%;color:brown;">{{ etiq.extraits_id.extraits_content}} </p> </li>
+	</div>
+
+
+</ul>
+
+{% endfor %} 
+		
+		
+{% else %}
+   	 <p>No proust are available.</p>
+{% endif %}
+{% endblock %}

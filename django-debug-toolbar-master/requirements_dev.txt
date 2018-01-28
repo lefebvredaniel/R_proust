@@ -1,0 +1,27 @@
+# The debug toolbar itself
+
+-e .
+
+# Runtime dependencies
+
+Django
+sqlparse
+django_jinja
+
+# Testing
+
+coverage
+flake8
+html5lib
+isort
+selenium
+tox
+
+# Documentation
+
+Sphinx
+
+# Other tools
+
+transifex-client
+wheel
