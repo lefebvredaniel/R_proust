@@ -21,7 +21,7 @@ if settings.DEBUG:
    import debug_toolbar
  
 urlpatterns = [
-    path('proust/', include('proust.urls')),
+ 
     path('digressions/', include('digressions.urls')),
     path('admin/', admin.site.urls),
     url(r'^__debug__/', include(debug_toolbar.urls)),

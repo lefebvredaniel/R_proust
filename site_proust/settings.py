@@ -23,31 +23,31 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mey6c(0=7-qu6hda*qs^)iewviurx508&n)o!0frh6v0^x#e8='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-if DEBUG:
-   INTERNAL_IPS = ('127.0.0.1', 'localhost',)
-  
-
- 
-
-   DEBUG_TOOLBAR_PANELS = [
-       'debug_toolbar.panels.versions.VersionsPanel',
-       'debug_toolbar.panels.timer.TimerPanel',
-       'debug_toolbar.panels.settings.SettingsPanel',
-       'debug_toolbar.panels.headers.HeadersPanel',
-       'debug_toolbar.panels.request.RequestPanel',
-       'debug_toolbar.panels.sql.SQLPanel',
-       'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-       'debug_toolbar.panels.templates.TemplatesPanel',
-       'debug_toolbar.panels.cache.CachePanel',
-       'debug_toolbar.panels.signals.SignalsPanel',
-       'debug_toolbar.panels.logging.LoggingPanel',
-       'debug_toolbar.panels.redirects.RedirectsPanel',
-   ]
-
-   DEBUG_TOOLBAR_CONFIG = {
-       'INTERCEPT_REDIRECTS': False,
-   }
+DEBUG = True
+##if DEBUG:
+##   INTERNAL_IPS = ('127.0.0.1', 'localhost',)
+##  
+##
+## 
+##
+##   DEBUG_TOOLBAR_PANELS = [
+##       'debug_toolbar.panels.versions.VersionsPanel',
+##       'debug_toolbar.panels.timer.TimerPanel',
+##       'debug_toolbar.panels.settings.SettingsPanel',
+##       'debug_toolbar.panels.headers.HeadersPanel',
+##       'debug_toolbar.panels.request.RequestPanel',
+##       'debug_toolbar.panels.sql.SQLPanel',
+##       'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+##       'debug_toolbar.panels.templates.TemplatesPanel',
+##       'debug_toolbar.panels.cache.CachePanel',
+##       'debug_toolbar.panels.signals.SignalsPanel',
+##       'debug_toolbar.panels.logging.LoggingPanel',
+##       'debug_toolbar.panels.redirects.RedirectsPanel',
+##   ]
+##
+##   DEBUG_TOOLBAR_CONFIG = {
+##       'INTERCEPT_REDIRECTS': False,
+##   }
 
 ALLOWED_HOSTS = []
 
@@ -56,7 +56,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     #'debug_toolbar',
-    'proust.apps.ProustConfig',
+   
     'digressions.apps.DigressionsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -70,7 +70,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+ #   'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -79,20 +79,20 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-DEBUG_TOOLBAR_PANELS = [
-    'debug_toolbar.panels.versions.VersionsPanel',
-    'debug_toolbar.panels.timer.TimerPanel',
-    'debug_toolbar.panels.settings.SettingsPanel',
-    'debug_toolbar.panels.headers.HeadersPanel',
-    'debug_toolbar.panels.request.RequestPanel',
-    'debug_toolbar.panels.sql.SQLPanel',
-    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    'debug_toolbar.panels.templates.TemplatesPanel',
-    'debug_toolbar.panels.cache.CachePanel',
-    'debug_toolbar.panels.signals.SignalsPanel',
-    'debug_toolbar.panels.logging.LoggingPanel',
-    'debug_toolbar.panels.redirects.RedirectsPanel',
-]
+##DEBUG_TOOLBAR_PANELS = [
+##    'debug_toolbar.panels.versions.VersionsPanel',
+##    'debug_toolbar.panels.timer.TimerPanel',
+##    'debug_toolbar.panels.settings.SettingsPanel',
+##    'debug_toolbar.panels.headers.HeadersPanel',
+##    'debug_toolbar.panels.request.RequestPanel',
+##    'debug_toolbar.panels.sql.SQLPanel',
+##    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+##    'debug_toolbar.panels.templates.TemplatesPanel',
+##    'debug_toolbar.panels.cache.CachePanel',
+##    'debug_toolbar.panels.signals.SignalsPanel',
+##    'debug_toolbar.panels.logging.LoggingPanel',
+##    'debug_toolbar.panels.redirects.RedirectsPanel',
+##]
 
 ROOT_URLCONF = 'site_proust.urls'
 
