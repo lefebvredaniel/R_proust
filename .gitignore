@@ -3,5 +3,6 @@ __pycache__
 myvenv
 digressions_db
 django-debug-toolbar-master
+debug_toolbar
 /static
 .DS_Store
