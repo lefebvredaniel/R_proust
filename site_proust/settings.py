@@ -55,7 +55,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'debug_toolbar',
+    #'debug_toolbar',
     'proust.apps.ProustConfig',
     'digressions.apps.DigressionsConfig',
     'django.contrib.admin',
