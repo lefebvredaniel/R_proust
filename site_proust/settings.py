@@ -123,7 +123,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'digressions_db',
         'USER': 'root',
-        'PASSWORD': 'tnBPAidOe2=C',
+        'PASSWORD': 'xxxxxx',
         'HOST': 'localhost',
         'PORT': '',
     }
