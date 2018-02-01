@@ -17,13 +17,15 @@ from django.urls import include, path
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls import url
-if settings.DEBUG:
-   import debug_toolbar
- 
-urlpatterns = [
+
+urlpatterns= [
  
     path('digressions/', include('digressions.urls')),
-    path('admin/', admin.site.urls),
-    url(r'^__debug__/', include(debug_toolbar.urls)),
+    path('admin/', admin.site.urls)
+    
 ]
-
+if settings.DEBUG:
+   import debug_toolbar
+   urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
