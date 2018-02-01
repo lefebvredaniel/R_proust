@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 ### settings.py file
 
 import os
-DEBUG=True
+DEBUG=False
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,7 +29,7 @@ SECRET_KEY = 'xx'
 
 #DEBUG=True
 
-#ALLOWED_HOSTS = ['192.168.0.32']
+#ALLOWED_HOSTS = ['1']
 
 INTERNAL_IPS = ('127.0.0.1', 'localhost',)
 # Application definition
@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'site_proust.wsgi.application'
 ##            'ENGINE': 'django.db.backends.mysql',
 ##            'NAME': 'digressions_db',
 ##            'USER': 'daniellefebvre',
-##            'PASSWORD': 'PN9-ySR-m5U-6DX',
+##            'PASSWORD': 'XXXXX',
 ##            'HOST': 'daniellefebvre.mysql.pythonanywhere-services.com',
 ##            'PORT': '',
 ##                   }
@@ -122,20 +122,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-##DATABASES = {
-##   'default': {
-##        'ENGINE': 'django.db.backends.mysql',
-##        'NAME': 'digressions_db',
-##        'USER': 'root',
-##        'PASSWORD': 'tnBPAidOe2=C',
-##        'HOST': 'localhost',
-##        'PORT': '',
-##    }
-##}
-##DEBUG=True
-##try:
-##    from settings.local_settings import *
-##  
-##except ImportError:
-##        print("pas import")
-##        pass
