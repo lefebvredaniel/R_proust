@@ -10,22 +10,22 @@
 
 {% if dico %}
 	<ul class="list-unstyled">
-    
+
 
 		{% for etiq , value in dico.items %}
        {% if value == '' %}
-          
-          <br> 
-         <h3> {{etiq}} </h3>  <br> 
-        
-       {% else %} 
-       
-	           <li> <a href="/digressions/{{etiq.id}}/detail"> {{ etiq}} {{value}} </a></li> 
+
+          <br>
+         <h3> {{etiq}} </h3>  <br>
+
+       {% else %}
+
+	           <li> <a href="/{{etiq.id}}/detail"> {{ etiq}} {{value}} </a></li>
         {% endif %}
 		{% endfor %}
 
-   
-  </ul>		
+
+  </ul>
 {% else %}
    	 <p>No proust are available.</p>
 {% endif %}
