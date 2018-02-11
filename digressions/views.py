@@ -9,9 +9,17 @@ from django.db.models import Count
 from digressions.models import Extraits, Etiquettes,R_Extraits_Etiquettes
 
 from django.urls import reverse
+
+
 ##from django.db import connection
 ##connection.queries
-##                              PAGE ACCUEIL
+##
+from digressions.forms import RechercheForm
+   
+
+
+
+#PAGE ACCUEIL
 def index(request):
 
 
@@ -85,3 +93,57 @@ def poursyretrouver(request):
     print(dico)
     context = {'dico':dico}
     return render(request, 'digressions/poursyretrouver.html', context)
+def recherche(request):
+    if request.method == 'POST':  # S'il s'agit d'une requête POST
+        form = RechercheForm(request.POST)  # Nous reprenons les données
+        print(form)
+
+        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
+            
+
+            # Ici nous pouvons traiter les données du formulaire
+            mot = form.cleaned_data['mot']
+            print("444", mot)
+ #           message = form.cleaned_data['message']
+ #           envoyeur = form.cleaned_data['envoyeur']
+ #           renvoi = form.cleaned_data['renvoi']
+
+            # Nous pourrions ici envoyer l'e-mail grâce aux données que nous venons de récupérer
+
+ #           envoi = True
+        else:
+            print("erreur")
+    else:
+        # Si ce n'est pas du POST, c'est probablement une requête GET
+        form = RechercheForm()
+        print("toto")
+        # Nous créons un formulaire vide
+    etiquettes_list=Etiquettes.objects.filter(etiquettes_nom=mot). annotate(nb=Count('r_extraits_etiquettes')).order_by('etiquettes_nom')
+ #   V=Etiquettes.objects.get(id=2).etiquettes_nom
+ #   print(V[0])
+
+
+
+    PL=''
+    dico={}
+    ##   EE va représenter une étiquette tirée de etiquettes_list ex. [<Etiquettes: songe>]
+    for EE in etiquettes_list:
+
+ 
+
+
+
+    ##on ajoute au dictionnaire "dico" le nombre d'occurrences de l'étiquette EE {<Etiquettes: songe>: 1, <Etiquettes: jalousie>: 1,
+    ##      <Etiquettes: amour>: 2 etc.}
+        B=str(EE.nb)
+        dico[EE]='('+B+')'
+    
+    context = {'dico':dico} 
+    return render(request, 'digressions/recherche.html', context)
+
+
+
+
+
+
+

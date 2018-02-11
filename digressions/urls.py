@@ -9,7 +9,8 @@ urlpatterns = [
     path('<int:titre_id>/contenu', views.contenu, name='contenu'),
     path('apropos', views.apropos, name='apropos'),
     path('<int:etiq_id>/detail/',views.detail, name='detail'),
-    path('poursyretrouver',views.poursyretrouver, name='poursyretrouver')
+    path('poursyretrouver',views.poursyretrouver, name='poursyretrouver'),
+    path('recherche', views.recherche, name='recherche')
 
 
 

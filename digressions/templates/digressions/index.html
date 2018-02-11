@@ -5,7 +5,25 @@
   <div class="text-center">
     <div class="text-primary"><h3> classement des mots-clés</h3></div>
   </div>
-</dir>
+</div>
+
+
+
+<form action="/recherche" method="POST">
+  <label for="mot"> moooot: </label>
+  <input id="mot" type="text" name="mot" 
+
+  
+   
+ 
+  <input type="submit" value="c'est la">
+  {% csrf_token %}
+ 
+</form>
+
+
+
+
 {% if dico %}
 	<ul>
 		{% for etiq , value in dico.items %}
