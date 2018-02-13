@@ -1,0 +1,11 @@
+*.pyc
+__pycache__
+myvenv
+digressions_db
+django-debug-toolbar-master
+debug_toolbar
+dev.py
+defaults
+settings
+/static
+.DS_Store
