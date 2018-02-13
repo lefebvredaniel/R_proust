@@ -7,7 +7,7 @@
     <div class="text-primary"><h3> classement alphabétique des mots-clés </h3></div>
   </div>
 </div>
-
+<footer>
 {% if dico %}
 	<ul class="list-unstyled">
 
@@ -15,8 +15,8 @@
 		{% for etiq , value in dico.items %}
        {% if value == '' %}
 
-          <br>
-         <h3> {{etiq}} </h3>  <br>
+          
+         <h5> {{etiq}} </h5>  
 
        {% else %}
 
@@ -26,6 +26,7 @@
 
 
   </ul>
+</footer>
 {% else %}
    	 <p>No proust are available.</p>
 {% endif %}

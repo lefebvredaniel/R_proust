@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script <link rel="stylesheet" type="text/css" href="{% static 'digressions/style.css' %}" />src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'digressions/style.css' %}" > 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -24,12 +25,20 @@
       <li><a href="/poursyretrouver">Pour s'y retrouver</a></li>
       <li><a href="#">liens intéressants</a></li>
     </ul>
-    <form class="navbar-form navbar-left">
+    <form class="navbar-form navbar-left"
+      action="/recherche" method="POST">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="mot">
-        </div>
-        <button type="submit" class="btn btn-default">recherche</button>
-      </form>
+           
+            
+            <input type="text" class="form-control" name="mot" placeholder="mot recherché"
+           
+            <input type="submit">
+            {% csrf_token %}
+ 
+         
+
+    </form>
+
   </div>
 </nav>
 </div>

@@ -25,7 +25,8 @@ def index(request):
 
 
   #  etiquettes_list = Etiquettes.objects.all().order_by ('etiquettes_nom')
-    etiquettes_list=Etiquettes.objects.annotate(nb=Count('r_extraits_etiquettes')).order_by('-nb')[:10]
+    etiquettes_list=Etiquettes.objects.annotate(nb=Count('r_extraits_etiquettes')).order_by('-nb','etiquettes_nom')
+ 
 
     dico={}
     ##   EE va représenter une étiquette tirée de etiquettes_list ex. [<Etiquettes: songe>]
@@ -75,7 +76,7 @@ def poursyretrouver(request):
     for EE in etiquettes_list:
 
         premiereLettre=Etiquettes.objects.get(id=EE.id).etiquettes_nom
-        print(premiereLettre[0])
+        
 
         if (PL!=premiereLettre[0]):
 
@@ -90,20 +91,22 @@ def poursyretrouver(request):
     ##      <Etiquettes: amour>: 2 etc.}
         B=str(EE.nb)
         dico[EE]='('+B+')'
-    print(dico)
+    
     context = {'dico':dico}
     return render(request, 'digressions/poursyretrouver.html', context)
+
 def recherche(request):
     if request.method == 'POST':  # S'il s'agit d'une requête POST
         form = RechercheForm(request.POST)  # Nous reprenons les données
-        print(form)
+ 
 
         if form.is_valid(): # Nous vérifions que les données envoyées sont valides
             
 
             # Ici nous pouvons traiter les données du formulaire
             mot = form.cleaned_data['mot']
-            print("444", mot)
+ 
+            
  #           message = form.cleaned_data['message']
  #           envoyeur = form.cleaned_data['envoyeur']
  #           renvoi = form.cleaned_data['renvoi']
@@ -111,14 +114,14 @@ def recherche(request):
             # Nous pourrions ici envoyer l'e-mail grâce aux données que nous venons de récupérer
 
  #           envoi = True
-        else:
-            print("erreur")
+       
+            
     else:
         # Si ce n'est pas du POST, c'est probablement une requête GET
         form = RechercheForm()
-        print("toto")
+ 
         # Nous créons un formulaire vide
-    etiquettes_list=Etiquettes.objects.filter(etiquettes_nom=mot). annotate(nb=Count('r_extraits_etiquettes')).order_by('etiquettes_nom')
+    etiquettes_list=Etiquettes.objects.filter(etiquettes_nom__startswith=mot).annotate(nb=Count('r_extraits_etiquettes')).order_by('etiquettes_nom')
  #   V=Etiquettes.objects.get(id=2).etiquettes_nom
  #   print(V[0])
 

@@ -1,3 +1,35 @@
 h1 {
     color: blue;
 }
+* {
+	box-sizing: border-box;
+}
+footer {
+  margin: 10px;
+	font-family: helvetica, arial, sans-serif;
+	columns: 5;
+}
+	
+p {
+  color: #fff;
+  padding: 10px;
+  margin: 0;
+  background: white;
+  
+  /* display: inline-block; width: 100%; 
+  -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+          page-break-inside: avoid; /* Firefox */
+               break-inside: avoid; /* IE 10+ */
+               break-inside: avoid-column; /* W3C */
+  
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+/*p:first-child {background: tomato}
+p:nth-child(2) {background: orange}
+p:nth-child(3) {background: #800000}
+p:nth-child(4) {background: #FF3399}
+p:nth-child(5) {background: #3399FF}
+p:nth-child(6) {background: #bada55}**/
