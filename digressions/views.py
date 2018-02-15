@@ -121,7 +121,7 @@ def recherche(request):
         form = RechercheForm()
  
         # Nous créons un formulaire vide
-    etiquettes_list=Etiquettes.objects.filter(etiquettes_nom__startswith=mot).annotate(nb=Count('r_extraits_etiquettes')).order_by('etiquettes_nom')
+    etiquettes_list=Etiquettes.objects.filter(etiquettes_nom__startswith=mot.lower()).annotate(nb=Count('r_extraits_etiquettes')).order_by('etiquettes_nom')
  #   V=Etiquettes.objects.get(id=2).etiquettes_nom
  #   print(V[0])
 
@@ -144,32 +144,7 @@ def recherche(request):
     context = {'dico':dico} 
     return render(request, 'digressions/recherche.html', context)
 
-def traitement_post(request):
 
-if request.method == 'POST':  # S'il s'agit d'une requête POST
-        form = PostForm(request.POST)  # Nous reprenons les données
- 
-
-        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
-            
-
-            # Ici nous pouvons traiter les données du formulaire
-            post = form.cleaned_data['post']
- 
-            
- #           message = form.cleaned_data['message']
- #           envoyeur = form.cleaned_data['envoyeur']
- #           renvoi = form.cleaned_data['renvoi']
-
-            # Nous pourrions ici envoyer l'e-mail grâce aux données que nous venons de récupérer
-
- #           envoi = True
-       
-            
-    else:
-        # Si ce n'est pas du POST, c'est probablement une requête GET
-        form = PostForm()
- 
  
     return render(request, 'digressions/traitement_post.html', context)
 
