@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser
 
 class RechercheForm(forms.Form):
     mot = forms.CharField(max_length=100)
@@ -10,3 +12,7 @@ class RechercheForm(forms.Form):
 class ConnexionForm(forms.Form):
     username = forms.CharField(label="Nom", max_length=30)
     password = forms.CharField(label="Mot de passe", widget=forms.PasswordInput)
+
+
+
+

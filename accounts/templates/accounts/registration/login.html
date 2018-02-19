@@ -1,0 +1,14 @@
+
+<style>
+ 
+input
+{color:blue; border-radius:16px;}
+ 
+</style>
+
+<h2>SE CONNECTER...</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Login</button>
+</form>

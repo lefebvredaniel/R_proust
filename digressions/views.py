@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404
 
 from django.http import HttpResponseRedirect, HttpResponse
@@ -9,12 +9,12 @@ from django.db.models import Count
 from digressions.models import Extraits, Etiquettes,R_Extraits_Etiquettes
 
 from django.urls import reverse
-
+ 
 
 ##from django.db import connection
 ##connection.queries
 ##
-from digressions.forms import RechercheForm
+from digressions.forms import RechercheForm, ConnexionForm
    
 
 
@@ -146,8 +146,41 @@ def recherche(request):
 
 
  
-    return render(request, 'digressions/traitement_post.html', context)
+    
 
+def connexion(request):
+    error = False
+
+    if request.method == "POST":
+        form = ConnexionForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            user = authenticate(username=username, password=password)  # Nous vérifions si les données sont correctes
+            if user:  # Si l'objet renvoyé n'est pas None
+                login(request, user)  # nous connectons l'utilisateur
+            else: # sinon une erreur sera affichée
+                error = True
+    else:
+        form = ConnexionForm()
+   
+    return render(request, 'digressions/connexion.html', locals())
+def inscription(request):
+    
+    if request.method == "POST":
+        form = ConnexionForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+ 
+    else:
+        form = ConnexionForm()
+
+    return render(request, 'digressions/inscription.html', locals())
+
+def deconnexion(request):
+    logout(request)
+    return HttpResponseRedirect(reverse(connexion))
 
 
 

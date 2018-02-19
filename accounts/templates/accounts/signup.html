@@ -1,0 +1,8 @@
+<!-- templates/signup.html -->
+
+<h1>S'inscrire...</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Sign up</button>
+</form>

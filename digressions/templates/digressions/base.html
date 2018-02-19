@@ -24,7 +24,22 @@
       <li><a href="/apropos">A propos</a></li>
       <li><a href="/poursyretrouver">Pour s'y retrouver</a></li>
       <li><a href="#">liens intéressants</a></li>
-    </ul>
+       {% if user.is_authenticated %}
+          <li><a href="#">{{user.username }}</a> </li>
+          <li><a href="{% url 'logout' %}">déconnexion</a></li>
+
+       {% else %}
+        <li><a href="accounts/login">se connecter</a></li>
+        <li><a href="accounts/signup">s'inscrire</a></li>
+        
+
+        {% endif %}
+      
+
+
+      
+
+   </ul>
     <form class="navbar-form navbar-left"
       action="/recherche" method="POST">
         <div class="form-group">
@@ -34,11 +49,13 @@
            
             <input type="submit">
             {% csrf_token %}
- 
-         
+
+     
 
     </form>
 
+         
+          
   </div>
 </nav>
 </div>

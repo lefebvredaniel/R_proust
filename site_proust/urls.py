@@ -20,8 +20,12 @@ from django.conf.urls import url
 
 urlpatterns= [
 
+ 
+    path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('accounts.urls')),
     path('', include('digressions.urls')),
-    path('admin/', admin.site.urls)
+ 
 
 ]
 if settings.DEBUG:
