@@ -181,6 +181,11 @@ def inscription(request):
 def deconnexion(request):
     logout(request)
     return HttpResponseRedirect(reverse(connexion))
+def liensinteressants(request):
+    context={}
+    
+
+    return render(request, 'digressions/liensinteressants.html', context)
 
 
 

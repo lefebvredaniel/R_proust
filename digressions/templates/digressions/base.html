@@ -23,7 +23,7 @@
       <li class="inactive"><a href="/">Accueil</a></li>
       <li><a href="/apropos">A propos</a></li>
       <li><a href="/poursyretrouver">Pour s'y retrouver</a></li>
-      <li><a href="#">liens intéressants</a></li>
+      <li><a href="/liensinteressants">liens intéressants</a></li>
        {% if user.is_authenticated %}
           <li><a href="#">{{user.username }}</a> </li>
           <li><a href="{% url 'logout' %}">déconnexion</a></li>
