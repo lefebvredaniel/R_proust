@@ -1,0 +1,40 @@
+{% extends 'digressions/base.html' %}
+{% block content %}
+
+
+
+
+
+{% if commentaires %}
+
+
+	{% for c in commentaires %}
+	
+	<ul class="list-unstyled">
+		{{c.id}}
+
+		<p> <a href="/{{c.titre_id}}/contenu">{{c.titre}} </a></p>
+
+
+		  le  {{c.date}}</p>
+		<div class="jumbotron">
+	 <li><p style="font-family:verdana;font-size:100%;color:brown;">
+		{{c}} </p></li>
+
+
+	
+
+
+		
+
+
+	</ul>
+
+	{% endfor %}
+
+
+{% else %}
+   	 <p>Pas encore de commentaires</p>
+{% endif %}
+
+{% endblock %}

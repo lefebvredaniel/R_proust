@@ -1,5 +1,6 @@
 
 {% load static %}
+
 <head>
   <title>Proust</title>
   <meta charset="utf-8">
@@ -9,11 +10,12 @@
   <link rel="stylesheet" type="text/css" href="{% static 'digressions/style.css' %}" > 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <body>
 <div class="container-fluid">
    <h1> <div class="text-center">les digressions de Proust  </h1><div>
   <div class="container">
-  <img src="/static/digressions/images/combray.jpg"  alt="combray" width="940" height="198">
+  <img src="/static/digressions/images/combray.jpg"  alt="combray" width="940" height="198" class="img-responsive center-block"/>
 </div>
 <nav class="navbar navbar-inverse">
   <div class="container">
@@ -24,23 +26,26 @@
       <li><a href="/apropos">A propos</a></li>
       <li><a href="/poursyretrouver">Pour s'y retrouver</a></li>
       <li><a href="/liensinteressants">liens intéressants</a></li>
-       {% if user.is_authenticated %}
+      {% if user.is_authenticated %}
+
           <li><a href="#">{{user.username }}</a> </li>
           <li><a href="{% url 'logout' %}">déconnexion</a></li>
+           <li><a href="/mescommentaires"> mes commentaires</a></li>
+           
+         
 
-       {% else %}
-        <li><a href="accounts/login">se connecter</a></li>
-        <li><a href="accounts/signup">s'inscrire</a></li>
+      {% else %}
+        <li><a href="/accounts/login">se connecter</a></li>
+        <li><a href="/accounts/signup">s'inscrire</a></li>
+
         
 
-        {% endif %}
+      {% endif %}
       
 
+    </ul>
 
-      
-
-   </ul>
-    <form class="navbar-form navbar-left"
+    <form class="navbar-form navbar-right"
       action="/recherche" method="POST">
         <div class="form-group">
            
@@ -50,7 +55,8 @@
             <input type="submit">
             {% csrf_token %}
 
-     
+        </div>
+
 
     </form>
 

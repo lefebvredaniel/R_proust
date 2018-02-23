@@ -12,7 +12,8 @@ urlpatterns = [
     path('<int:etiq_id>/detail/',views.detail, name='detail'),
     path('poursyretrouver',views.poursyretrouver, name='poursyretrouver'),
     path('liensinteressants',views.liensinteressants, name='liensinteressants'),
-    
+    path('mescommentaires',views.mescommentaires, name='mescommentaires'),
+ 
     path('recherche', views.recherche, name='recherche'),
  
 

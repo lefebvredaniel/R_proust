@@ -13,13 +13,21 @@
  
 
 	 <p style="font-family:verdana;font-size:115%;color:cornflowerBlue;">{{ titre.extraits_content}} </p>
-
-<form action="">
-Votre commentaire sur ce texte:<br>
-<input type="textarea" name="post"  maxlength="300">
+{% if user.is_authenticated %}
+          
+          <form action="" method="POST"
+Votre commentaire sur ce texte...:<br>
+<input type="CharField(max_length=300)" name="commentaires"  maxlength="300">
 <br>
-
+<input type="submit">
+            {% csrf_token %}
 </form>
+       {% else %}
+        
+        
+
+        {% endif %}
+
 
 </body>
 </html>
