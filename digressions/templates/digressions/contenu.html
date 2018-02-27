@@ -6,28 +6,48 @@
 
 <div class="text-center">
 		<div class="text-primary"><h2> 
+
  {{titre.extraits_titre}}</h2>
-		</div>
-	</div>
-       
  
+		</div>
+
+</div>
+           
 
 	 <p style="font-family:verdana;font-size:115%;color:cornflowerBlue;">{{ titre.extraits_content}} </p>
+
+
+
 {% if user.is_authenticated %}
-          
-          <form action="" method="POST"
-Votre commentaire sur ce texte...:<br>
-<input type="CharField(max_length=300)" name="commentaires"  maxlength="300">
-<br>
-<input type="submit">
-            {% csrf_token %}
-</form>
-       {% else %}
-        
-        
+	{% if commentaires %}
+		{% for c in commentaires %}
+     
+    <form action="" method="POST"
+	Votre commentaire sur ce texte...:<br>
+	<textarea id="commentaires" type="textarea" name="commentaires" rows="5" cols="200"> {{c.body}} </textarea>
+	<input type="submit"> modification prise en compte ( {{c.date}})
+    {% csrf_token %}
+	</form>
+		{% endfor %}
+	{% else %}
+		<form action="" method="POST"
+		Votre commentaire sur ce texte...:<br>
+		<textarea id="commentaires" type="textarea" name="commentaires" rows="5" cols="200"> mon commentaire:</textarea>
+		<!-- <input id="commentaires" type="textarea" name="commentaires" placeholder="votre commentaire"> -->
+		<input type="submit">
+    	{% csrf_token %}
 
-        {% endif %}
+	</form>
 
+	
+	
+
+        
+ {% endif %}  
+ {% else %}     
+
+{% endif %}
+ 
 
 </body>
 </html>

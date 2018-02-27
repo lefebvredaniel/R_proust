@@ -9,9 +9,9 @@
 
 
 	{% for c in commentaires %}
-	
+	{{c.id}}
 	<ul class="list-unstyled">
-		{{c.id}}
+		
 
 		<p> <a href="/{{c.titre_id}}/contenu">{{c.titre}} </a></p>
 
@@ -21,10 +21,36 @@
 	 <li><p style="font-family:verdana;font-size:100%;color:brown;">
 		{{c}} </p></li>
 
+<div class="container">
+  <div class="row">
+    
+    <div class="col-lg-2">
+      <a href="/{{c.id}}/mescommentaires/amodifier" class="btn btn-primary btn-sm " role="button" >Modification</a>
+    </div>
+    <div class="col-lg-2">
+     
+    </div>
+    <div class="col-lg-2">
+     
+    </div>
+    <div class="col-lg-2">
+     
+    </div>
+    <div class="col-lg-2">
+     
+    </div>
+    
+    <div class="col-lg-2">
+      <a href="/{{c.id}}/mescommentaires/asupprimer" class="btn btn-danger btn-sm " role="button" >Suppression</a>
+      
+    </div>
+  </div>
+</div>	
+
 
 	
 
-
+	
 		
 
 

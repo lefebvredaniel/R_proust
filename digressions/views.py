@@ -41,10 +41,11 @@ def index(request):
 ##                              PAGE CONTENU (extrait)
 def contenu(request, titre_id):
 
- 
     
 
     titre = get_object_or_404(Extraits, pk=titre_id)
+
+   
     if request.method == 'POST':  # S'il s'agit d'une requête POST
         form = CommentForm(request.POST)  # Nous reprenons les données
  
@@ -62,19 +63,19 @@ def contenu(request, titre_id):
 ##                print(e.id)
             titr=Extraits.objects.filter(pk=titre_id)
             for t in titr:
-                print(t.id)
+                
             
 
-            p=Commentaires(author_id=username,body =form.cleaned_data['commentaires'],date=timezone.now(),titre_id=t.id)
-            print("eee")
+                p=Commentaires(author_id=username,body =form.cleaned_data['commentaires'],date=timezone.now(),titre_id=t.id)
+ 
 
             p.save()
-            print("apres")
+ 
             
     else:
         "Si ce n'est pas du POST, c'est probablement une requête GET"
         print("probleme")
-        form = CommentForm()
+##        form = CommentForm()
     
 
     return render(request, 'digressions/contenu.html', {'titre': titre})
@@ -154,20 +155,11 @@ def recherche(request):
  
         # Nous créons un formulaire vide
     etiquettes_list=Etiquettes.objects.filter(etiquettes_nom__startswith=mot.lower()).annotate(nb=Count('r_extraits_etiquettes')).order_by('etiquettes_nom')
- #   V=Etiquettes.objects.get(id=2).etiquettes_nom
- #   print(V[0])
-
-
-
+ 
     PL=''
     dico={}
     ##   EE va représenter une étiquette tirée de etiquettes_list ex. [<Etiquettes: songe>]
     for EE in etiquettes_list:
-
- 
-
-
-
     ##on ajoute au dictionnaire "dico" le nombre d'occurrences de l'étiquette EE {<Etiquettes: songe>: 1, <Etiquettes: jalousie>: 1,
     ##      <Etiquettes: amour>: 2 etc.}
         B=str(EE.nb)
@@ -176,43 +168,6 @@ def recherche(request):
     context = {'dico':dico} 
     return render(request, 'digressions/recherche.html', context)
 
-
- 
-    
-
-"""def connexion(request):
-    error = False
-
-    if request.method == "POST":
-        form = ConnexionForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            user = authenticate(username=username, password=password)  # Nous vérifions si les données sont correctes
-            if user:  # Si l'objet renvoyé n'est pas None
-                login(request, user)  # nous connectons l'utilisateur
-            else: # sinon une erreur sera affichée
-                error = True
-    else:
-        form = ConnexionForm()
-   
-    return render(request, 'digressions/connexion.html', locals())
-def inscription(request):
-    
-    if request.method == "POST":
-        form = ConnexionForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
- 
-    else:
-        form = ConnexionForm()
-
-    return render(request, 'digressions/inscription.html', locals())
-
-def deconnexion(request):
-    logout(request)
-    return HttpResponseRedirect(reverse(connexion))"""
 def liensinteressants(request):
     context={}
     
@@ -220,48 +175,70 @@ def liensinteressants(request):
     return render(request, 'digressions/liensinteressants.html', context)
 
 def mescommentaires(request):
-    comment=Commentaires.objects.filter(author_id=request.user.id).order_by ('date')
+   
+    comment=Commentaires.objects.filter(author_id=request.user.id).order_by ('-date')
     context={'commentaires':comment}
   
     return render(request, 'digressions/mescommentaires.html',context)
 
+def supprimer(request,id):
+    print(id)
+    
+    Commentaires.objects.filter(pk=id).delete()
+ 
+    comment=Commentaires.objects.filter(author_id=request.user.id).order_by ('-date')
+    context={'commentaires':comment}
+   
+    
+ 
+    return render(request, 'digressions/mescommentaires.html',context)
+def modifier(request,id):
                                                                              
-                                                                             
-                                                                             
+    comment = Commentaires.objects.filter(pk=id)
+ 
+   
+   
+    for t in comment:
+        print(t.titre_id)
+  
+    context={'commentaires':comment}
 
+    titre = get_object_or_404(Extraits, pk=t.titre_id)
+    if request.method == 'POST':  # S'il s'agit d'une requête POST
+        form = CommentForm(request.POST)  # Nous reprenons les données
+ 
 
-##def commentaires(request):
-##    if request.method == 'POST':  # S'il s'agit d'une requête POST
-##        form = CommentForm(request.POST)  # Nous reprenons les données
-## 
-##
-##        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
-##            
-##
-##            # Ici nous pouvons traiter les données du formulaire
-##            digressions_commentaires.body = form.cleaned_data['commentaires']
-##            print(digressions_commentaires.body)
-##            body.save
-##            print(user.id)
-##            print(user.username)
-##            print(titre_id)
-## 
-##            
-## #           message = form.cleaned_data['message']
-## #           envoyeur = form.cleaned_data['envoyeur']
-## #           renvoi = form.cleaned_data['renvoi']
-##
-##            # Nous pourrions ici envoyer l'e-mail grâce aux données que nous venons de récupérer
-##
-## #           envoi = True
-##       
-##            
-##    else:
-##        "Si ce n'est pas du POST, c'est probablement une requête GET"
-##        print("probleme")
-##        form = CommentForm()
-##    
-##    return (request, 'digressions/contenu.html',locals())
-##
+        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
+            print("pas pb")
+ 
+            # Ici nous pouvons traiter les données du formulaire
+ 
+            username=request.user.id
+ 
+##            user=User.objects.filter(username=username)
+##            print(user)
+##            for e in user:
+##                print(e.id)
+            titr=Extraits.objects.filter(pk=t.titre_id)
+            for t in titr:
+                print(t.id)
+ ##           Commentaires.objects.filter(id=id).delete()
+
+            p=Commentaires(id=id, author_id=username,body =form.cleaned_data['commentaires'],date=timezone.now(),titre_id=t.id)
+           
+
+            p.save()
+            
+            
+    else:
+        "Si ce n'est pas du POST, c'est probablement une requête GET"
+        print("probleme")
+##      form = CommentForm()
+    comment = Commentaires.objects.filter(pk=id)
+    context={'titre': titre, 'commentaires': comment}
+   
+    
+    return render(request, 'digressions/contenu.html', context)
+   
 
 

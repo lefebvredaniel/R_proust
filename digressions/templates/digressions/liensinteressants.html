@@ -1,21 +1,102 @@
 
-{% extends 'digressions/base.html' %}
-{% block content %}
+{% load static %}
 
-<ul>
+<head>
+  <title>Proust</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'digressions/style.css' %}" > 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container-fluid">
+   <h1> <div class="text-center">les digressions de Proust  </h1><div>
+ 
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="inactive"><a href="/">Accueil</a></li>
+      <li><a href="/apropos">A propos</a></li>
+      <li><a href="/poursyretrouver">Pour s'y retrouver</a></li>
+      <li><a href="/liensinteressants">liens intéressants</a></li>
+      {% if user.is_authenticated %}
+
+          <li><a href="#">{{user.username }}</a> </li>
+          <li><a href="{% url 'logout' %}">déconnexion</a></li>
+           <li><a href="/mescommentaires"> mes commentaires</a></li>
+           
+         
+
+      {% else %}
+        <li><a href="/accounts/login">se connecter</a></li>
+        <li><a href="/accounts/signup">s'inscrire</a></li>
+
+        
+
+      {% endif %}
+      
+
+    </ul>
+
+    <form class="navbar-form navbar-right"
+      action="/recherche" method="POST">
+        <div class="form-group">
+           
+            
+            <input type="text" class="form-control" name="mot" placeholder="mot recherché"
+           
+            <input type="submit">
+            {% csrf_token %}
+
+        </div>
+
+
+    </form>
+
+         
+          
+  </div>
+</nav>
+</div>
+<body>
+ <!-- <div class="container">
+  <img src="/static/digressions/images/combray_en_grand.jpg"  alt="combray" width="940" height="198" class="img-responsive center-block"/>
+</div> -->
+
+  
+
+<style>
+body {
+   width: 100%;
+  height: 100%;
+color:blue;
+background-color:white;
+background-image:url(static/digressions/images/combray_en_grand.png);
+background-repeat: no-repeat;
+ background-position: right;
+}
+</style>
+<style>
+ a  { color:red; }
+</style>
+
+
+<ul class="list-unstyled">
 <li><a href="http://amisdevinteuil.fr">Les Amis de Vinteuil</a></li>
 <li><a href="http://proust-personnages.fr"> les personnages de Proust</a> </li>
-
+<br><br><br><br><br><br><br><br><br><br>
 
 
 
 
 </ul>
-<div class="container">
- <img src="/static/digressions/images/combray-6-300x188.jpg"  alt="combray" class="img-responsive center-block"/>
-</div>
-<p> m'écrire </p>
+</style>
 
-gggg@gmail.com
 
-{% endblock %}
+
+

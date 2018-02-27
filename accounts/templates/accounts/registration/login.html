@@ -1,10 +1,7 @@
 
-<style>
- 
-input
-{color:blue; border-radius:16px;}
- 
-</style>
+{% extends 'digressions/base.html' %}
+{% block content %}
+
 
 <h2>SE CONNECTER...</h2>
 <form method="post">
@@ -12,3 +9,4 @@ input
   {{ form.as_p }}
   <button type="submit">Login</button>
 </form>
+ {% endblock %}
