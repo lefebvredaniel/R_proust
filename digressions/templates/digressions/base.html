@@ -9,11 +9,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'digressions/style.css' %}" > 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+
 </head>
 
 <body>
 <div class="container-fluid">
-   <h1> <div class="text-center">les "comme..." ou les digressions de Proust  </h1><div>
+   <h1> <div class="text-center">les "comme..." de Proust  </h1><div>
   <div class="container">
   <img src="/static/digressions/images/combray.jpg"  alt="combray" width="940" height="198" class="img-responsive center-block"/>
 </div>
@@ -35,8 +37,10 @@
          
 
       {% else %}
-        <li><a href="/accounts/login">se connecter</a></li>
-        <li><a href="/accounts/signup">s'inscrire</a></li>
+        <li><a href="/accounts/login">se connecter <span> Eventuellement s'inscrire auparavant pour écrire des commentaires </span>
+        </a></li>
+        <li><a href="/accounts/signup">s'inscrire <span> S'inscrire permet de se connecter et d'écrire des commentaires </span></a></li>
+
 
         
 

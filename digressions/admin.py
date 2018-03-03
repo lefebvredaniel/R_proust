@@ -18,7 +18,7 @@ class ChoixEtiquettes(admin.TabularInline):
 class ExtraitsAdmin(admin.ModelAdmin):
   
 
-    fields=['extraits_content','extraits_titre','pub_date']
+    fields=['extraits_content','extraits_titre','pub_date','extraits_livre']
  
 
     inlines = [ChoixEtiquettes]

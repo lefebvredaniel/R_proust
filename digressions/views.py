@@ -1,6 +1,5 @@
 from django.shortcuts import render
 
-"from django.contrib.auth import authenticate, login, logout"
 from django.shortcuts import get_object_or_404
 
 from django.http import HttpResponseRedirect, HttpResponse
@@ -11,29 +10,32 @@ from digressions.models import Extraits, Etiquettes,R_Extraits_Etiquettes, Comme
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.db import connection
-##connection.queries
-##
+
 from digressions.forms import RechercheForm, CommentForm
 from django.utils import timezone  
 
 
 
 #PAGE ACCUEIL
+
 def index(request):
 
     
-
-  #  etiquettes_list = Etiquettes.objects.all().order_by ('etiquettes_nom')
+#On affiche toutes les étiquettes en les classant par fréquence (le comptage se fait avec la table relation R_Extraits_Etiquettes) puis par ordre alphabétique
+  
     etiquettes_list=Etiquettes.objects.annotate(nb=Count('r_extraits_etiquettes')).order_by('-nb','etiquettes_nom')
  
 
     dico={}
-    ##   EE va représenter une étiquette tirée de etiquettes_list ex. [<Etiquettes: songe>]
+##   EE va représenter une étiquette tirée de etiquettes_list ex. [<Etiquettes: songe>]
     for EE in etiquettes_list:
 
-    ##on ajoute au dictionnaire "dico" le nombre d'occurrences de l'étiquette EE {<Etiquettes: songe>: 1, <Etiquettes: jalousie>: 1,
-    ##      <Etiquettes: amour>: 2 etc.}
+##on ajoute au dictionnaire "dico" le nombre d'occurrences de l'étiquette EE {<Etiquettes: songe>: 1, <Etiquettes: jalousie>: 1,
+##      <Etiquettes: amour>: 2 etc.}
+        
         dico[EE]=EE.nb
+
+        
     context = {'dico':dico}
    
 
@@ -74,7 +76,7 @@ def contenu(request, titre_id):
             
     else:
         "Si ce n'est pas du POST, c'est probablement une requête GET"
-        print("probleme")
+        
 ##        form = CommentForm()
     
 
@@ -87,10 +89,35 @@ def detail(request, etiq_id):
 
 
     selection_list= R_Extraits_Etiquettes.objects.filter(etiquettes_id_id=etiq_id)
-    etiquettes_list = Etiquettes.objects.filter(id=etiq_id)
+   
+    
+    nom_etiquette = Etiquettes.objects.filter(id=etiq_id)
+    dico_tit={}
+    for t in selection_list:
+        titre=t.extraits_id
+        y=t.extraits_id_id
+        z=R_Extraits_Etiquettes.objects.filter(extraits_id_id=y).values()
+        
+        
+        for liv in z:
+            w=Etiquettes.objects.filter(id=liv['etiquettes_id_id']).values()
+ 
 
-
-    context={'etiquettes_list':selection_list,'nom_etiquette':etiquettes_list}
+            for livre in w :
+               
+ 
+                if livre['etiquettes_nom'] =="du coté de chez Swann":
+ 
+                    dico_tit['livre']=(titre,livre['etiquettes_nom'])
+                else:
+                    if livre['etiquettes_nom']=="à l'ombre des jeunnes filles en fleurs":
+                        dico_tit['livre']=(titre,livre['etiquettes_nom'])
+            
+ 
+            
+    
+ 
+    context={'etiquettes_list':selection_list,'nom_etiquette':nom_etiquette}
   
 
     return render(request, 'digressions/detail.html',context)
@@ -98,8 +125,7 @@ def detail(request, etiq_id):
 
 def poursyretrouver(request):
     etiquettes_list=Etiquettes.objects.annotate(nb=Count('r_extraits_etiquettes')).order_by('etiquettes_nom')
- #   V=Etiquettes.objects.get(id=2).etiquettes_nom
- #   print(V[0])
+ 
 
 
 
@@ -178,6 +204,7 @@ def mescommentaires(request):
    
     comment=Commentaires.objects.filter(author_id=request.user.id).order_by ('-date')
     context={'commentaires':comment}
+    
   
     return render(request, 'digressions/mescommentaires.html',context)
 
@@ -232,7 +259,7 @@ def modifier(request,id):
             
     else:
         "Si ce n'est pas du POST, c'est probablement une requête GET"
-        print("probleme")
+        
 ##      form = CommentForm()
     comment = Commentaires.objects.filter(pk=id)
     context={'titre': titre, 'commentaires': comment}
