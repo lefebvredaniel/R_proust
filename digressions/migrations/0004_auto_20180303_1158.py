@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='extraits',
-            name='extraits_livre',
+            name='extraits_livre_id',
             field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='digressions.Livre'),
             preserve_default=False,
         ),
