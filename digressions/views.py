@@ -115,12 +115,12 @@ def detail(request, etiq_id):
 ##                        dico_tit['livre']=(titre,livre['etiquettes_nom'])
 ##            
  
-    nom_etiquette_1 = Etiquettes.objects.filter(id=etiq_id).values()
-    print(nom_etiquette_1)
-    nom_etiquette_2 = Etiquettes.objects.filter(id=etiq_id).values_list()
-    print(nom_etiquette_2)
-   
-    print(nom_etiquette_2.query)
+##    nom_etiquette_1 = Etiquettes.objects.filter(id=etiq_id).values()
+##    print(nom_etiquette_1)
+##    nom_etiquette_2 = Etiquettes.objects.filter(id=etiq_id).values_list()
+##    print(nom_etiquette_2)
+##   
+##    print(nom_etiquette_2.query)
     context={'etiquettes_list':selection_list,'nom_etiquette':nom_etiquette}
     return render(request, 'digressions/detail.html',context)
 
