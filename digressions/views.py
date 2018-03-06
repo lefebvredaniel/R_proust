@@ -87,39 +87,41 @@ def apropos(request):
 
 def detail(request, etiq_id):
 
-
+##extration de toutes les lignes qui ont l'étiquette sélectionnée dans l'écran précédent (etiq_id)
+## à partir de la table relation R_Extraits_...
     selection_list= R_Extraits_Etiquettes.objects.filter(etiquettes_id_id=etiq_id)
    
-    
+## selection du nom de l'étiquette sélectionnée (transmise par son id)
     nom_etiquette = Etiquettes.objects.filter(id=etiq_id)
-    dico_tit={}
-    for t in selection_list:
-        titre=t.extraits_id
-        y=t.extraits_id_id
-        z=R_Extraits_Etiquettes.objects.filter(extraits_id_id=y).values()
-        
-        
-        for liv in z:
-            w=Etiquettes.objects.filter(id=liv['etiquettes_id_id']).values()
+##    dico_tit={}
+##    for t in selection_list:
+##        titre=t.extraits_id
+##        y=t.extraits_id_id
+##        z=R_Extraits_Etiquettes.objects.filter(extraits_id_id=y).values()
+##        
+##        
+##        for liv in z:
+##            w=Etiquettes.objects.filter(id=liv['etiquettes_id_id']).values()
+## 
+##
+##            for livre in w :
+##               
+## 
+##                if livre['etiquettes_nom'] =="du coté de chez Swann":
+## 
+##                    dico_tit['livre']=(titre,livre['etiquettes_nom'])
+##                else:
+##                    if livre['etiquettes_nom']=="à l'ombre des jeunnes filles en fleurs":
+##                        dico_tit['livre']=(titre,livre['etiquettes_nom'])
+##            
  
-
-            for livre in w :
-               
- 
-                if livre['etiquettes_nom'] =="du coté de chez Swann":
- 
-                    dico_tit['livre']=(titre,livre['etiquettes_nom'])
-                else:
-                    if livre['etiquettes_nom']=="à l'ombre des jeunnes filles en fleurs":
-                        dico_tit['livre']=(titre,livre['etiquettes_nom'])
-            
- 
-            
-    
- 
+    nom_etiquette_1 = Etiquettes.objects.filter(id=etiq_id).values()
+    print(nom_etiquette_1)
+    nom_etiquette_2 = Etiquettes.objects.filter(id=etiq_id).values_list()
+    print(nom_etiquette_2)
+   
+    print(nom_etiquette_2.query)
     context={'etiquettes_list':selection_list,'nom_etiquette':nom_etiquette}
-  
-
     return render(request, 'digressions/detail.html',context)
 
 

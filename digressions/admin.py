@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 
-from .models import Extraits, Etiquettes, R_Extraits_Etiquettes, Commentaires
+from .models import Extraits, Etiquettes, R_Extraits_Etiquettes, Commentaires,Livre
 
 
 ##class Etiquettes(admin.TabularInline):
@@ -13,15 +13,18 @@ class ChoixEtiquettes(admin.TabularInline):
 
 
 
+class LivreAdmin(admin.ModelAdmin):
+    model = Livre
  
     
 class ExtraitsAdmin(admin.ModelAdmin):
   
 
-    fields=['extraits_content','extraits_titre','pub_date','extraits_livre']
+    fields=['extraits_content','extraits_titre','pub_date', 'extraits_livre']
  
 
     inlines = [ChoixEtiquettes]
+    InlineModelAdmin=[LivreAdmin]
 
 class CommentairesAdmin(admin.ModelAdmin):
     model= Commentaires
@@ -32,6 +35,7 @@ class CommentairesAdmin(admin.ModelAdmin):
 admin.site.register(Extraits, ExtraitsAdmin)
 admin.site.register(Etiquettes)
 admin.site.register(Commentaires)
+admin.site.register(Livre)
 
 
 # Register your models here.
