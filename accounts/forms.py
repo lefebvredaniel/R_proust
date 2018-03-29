@@ -11,6 +11,7 @@ class RechercheForm(forms.Form):
  
 class ConnexionForm(forms.Form):
     username = forms.CharField(label="Nom", max_length=30)
+    email = forms.EmailField(label="Votre adresse mail")
     password = forms.CharField(label="Mot de passe", widget=forms.PasswordInput)
 
 

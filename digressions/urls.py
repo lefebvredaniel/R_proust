@@ -2,6 +2,9 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 from django.conf.urls import url
+from .views import (CommentairesListView)
+
+
 app_name = 'digressions'
 
 urlpatterns = [
@@ -16,11 +19,36 @@ urlpatterns = [
     path('mescommentaires',views.mescommentaires, name='mescommentaires'),
     path('<int:id>/mescommentaires/asupprimer',views.supprimer, name='supprimer'),
     path('<int:id>/mescommentaires/amodifier',views.modifier, name='modifier'),
+ #   path('message',views.message, name='message'),
     path('recherche', views.recherche, name='recherche'),
- 
+    path ('contact',views.contact,name='contact'),
+    path('commentaires_list',CommentairesListView.as_view(),name="ProductListView"),
+    path('<int:id>/<int:titre_id>/mescommentaires/asupprimer1',views.supprimer1, name='supprimer1'),
+    path('<int:id>/mescommentaires/amodifier1',views.modifier1, name='modifier1'),
+
 
 
 
 
 
 ]
+"""
+Example URLConf for a contact form.
+If all you want is the basic ContactForm with default behavior,
+include this URLConf somewhere in your URL hierarchy (for example, at
+``/contact/``)
+"""
+
+
+
+
+
+##urlpatterns = [
+##    url('contact/',
+##        views.ContactFormView.as_view(),
+##        name='contact'),
+####    url(r'^sent/$',
+####        TemplateView.as_view(
+####            template_name='contact_form/contact_form_sent.html'),
+####        name='contact_form_sent'),
+##]
