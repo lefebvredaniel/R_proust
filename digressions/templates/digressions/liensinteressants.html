@@ -7,14 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="{% static 'digressions/style.css' %}" > 
+  <link rel="stylesheet" type="text/css" href="{% static 'digressions/style.css' %}" >
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 <div class="container-fluid">
-   <h1> <div class="text-center">les "...comme de Proust"  </h1><div>
- 
+   <h1> <div class="text-center">les "...comme" de Proust  </h1><div>
+
 <nav class="navbar navbar-inverse">
   <div class="container">
     <div class="navbar-header">
@@ -29,27 +29,27 @@
           <li><a href="#">{{user.username }}</a> </li>
           <li><a href="{% url 'logout' %}">déconnexion</a></li>
            <li><a href="/mescommentaires"> mes commentaires</a></li>
-           
-         
+
+
 
       {% else %}
         <li><a href="/accounts/login">se connecter</a></li>
         <li><a href="/accounts/signup">s'inscrire</a></li>
 
-        
+
 
       {% endif %}
-      
+
 
     </ul>
 
     <form class="navbar-form navbar-right"
       action="/recherche" method="POST">
         <div class="form-group">
-           
-            
+
+
             <input type="text" class="form-control" name="mot" placeholder="mot recherché"
-           
+
             <input type="submit">
             {% csrf_token %}
 
@@ -58,8 +58,8 @@
 
     </form>
 
-         
-          
+
+
   </div>
 </nav>
 </div>
@@ -68,7 +68,7 @@
   <img src="/static/digressions/images/combray_en_grand.jpg"  alt="combray" width="940" height="198" class="img-responsive center-block"/>
 </div> -->
 
-  
+
 
 <style>
 body {
@@ -89,6 +89,10 @@ background-repeat: no-repeat;
 <ul class="list-unstyled">
 <li><a href="http://amisdevinteuil.fr">Les Amis de Vinteuil</a></li>
 <li><a href="http://proust-personnages.fr"> les personnages de Proust</a> </li>
+<li><a href="https://lefoudeproust.fr"> le fou de Proust
+<li><a href="http://coquelicot2007.centerblog.net"> du côté de chez Proust
+<li><a href="https://marcelproustrecherche.wordpress.com"> du côté de chez Proust (Montréal)
+
 <br><br><br><br><br><br><br><br><br><br>
 
 

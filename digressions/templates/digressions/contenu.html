@@ -1,64 +1,109 @@
 {% extends 'digressions/base.html' %}
 {% block content %}
+<style>
+div.ex1 {
+    max-width:1000px;
+    margin: auto;
+    border: 3px solid blue;
 
+}
+</style>
 <body>
 
-
 <div class="text-center">
-		<div class="text-primary"><h2> 
-
- {{titre.extraits_titre}}</h2>
- 
+		<div class="text-primary">	
+			<h2><a href="/{{titre.id}}/contenu">Commentaires sur...{{titre.extraits_titre}} </a></h2>
 		</div>
-
 </div>
            
+ <p style="font-family:arial,sans-serif;font-size:115%;color:navy;background: Bisque" id="rempl.comme">{{ titre.extraits_content}} </p><br>
 
-	 <p style="font-family:arial,sans-serif;font-size:115%;color:cornflowerBlue;">{{ titre.extraits_content}} </p>
+	<!--  <p id="demo">{{titre.extraits_content}}</p> -->
+	<script type="text/javascript">
 
+	 var str = document.getElementById("rempl.comme").innerHTML; 
+    var txt = str.replace("comme","COMME");
+    document.getElementById("rempl.comme").innerHTML = txt;
 
+    </script> 
 
 {% if user.is_authenticated %}
 	{% if commentaires %}
+	     
 		{% for c in commentaires %}
-     
-    <form action="" method="POST"
-	Votre commentaire sur ce texte...:<br>
-	<textarea id="commentaires" type="textarea" name="commentaires" rows="5" cols="200"> {{c.body}} </textarea>
-	<input type="submit"> modification prise en compte ( {{c.date}})
-    {% csrf_token %}
-	</form>
+
+   			<form action="" method="POST"
+				 Votre commentaire sur ce texte...:<br>
+				<textarea id="commentaires" type="textarea" name="commentaires" rows="5" cols="200"> {{c.body}} </textarea>
+				<input type="submit"> modification prise en compte ( {{c.date}})
+    			{% csrf_token %}
+			</form>
+
 		{% endfor %}
+	
 	{% else %}
 		<form action="" method="POST"
-		Votre commentaire sur ce texte...:<br>
-		<textarea id="commentaires" type="textarea" name="commentaires" rows="5" cols="200"> mon commentaire:</textarea>
-		<!-- <input id="commentaires" type="textarea" name="commentaires" placeholder="votre commentaire"> -->
-		<input type="submit">
-    	{% csrf_token %}
+			Votre commentaire sur ce texte...:<br>
+			<textarea id="commentaires" type="textarea" name="commentaires" rows="5" cols="200"> </textarea>
+			<input type="submit">
+    		{% csrf_token %}
 
-	</form>
-
-	
-	
+		</form>
 
         
- {% endif %}  
- {% else %}     
+ 	{% endif %}  
+{% endif %}  
+    
+
+{% if liste_comment %}
+
+	{% for d in liste_comment %}
+		<br>
+	 <div class="ex1"> 
+		<ul class="list-unstyled">
+			<p> le  {{d.date}} 
+		  
+		  		{% if user.id == d.author_id  %}
+		  		{{d.author}}
+
+		  		{% else %}
+		  			un visiteur </p>
+
+		  		{% endif %}
+
+		  	<li><p style="font-family:verdana;font-size:100%;color:brown;">{{d.body}} </p></li> 
+		</ul>
+	</div>
+
+		{% if user.id == d.author_id %}
+
+			<div class="container">
+  				<div class="row">
+    
+    				<div class="col-lg-2">
+      					<a href="/{{d.id}}/mescommentaires/amodifier1" class="btn btn-primary btn-sm " role="button" >Modification</a>
+    				</div>
+
+    				<div class="col-lg-2"></div>
+
+    				<div class="col-lg-2"></div>
+    				<div class="col-lg-2"></div>
+    				<div class="col-lg-2"> </div>
+    
+    				<div class="col-lg-2">
+						<a href="/{{d.id}}/{{d.titre_id}}/mescommentaires/asupprimer1" class="btn btn-danger btn-sm " role="button" >Suppression</a>
+      
+    				</div>
+  				 </div>
+			</div>	
+		{% endif %}
+
+	{% endfor %}
 
 {% endif %}
- 
 
 </body>
 </html>
-
-
-
-
-
-
-
-</body>
 
  {% endblock %}
 

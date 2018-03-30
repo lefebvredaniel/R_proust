@@ -1,6 +1,9 @@
 {% extends 'digressions/base.html' %}
 {% block content %}
 
+
+    
+
 {% for nom_etiq in nom_etiquette %}
 <div class="container">
 
@@ -13,29 +16,38 @@
 {% endfor %}
 
 
-
+<script type="text/javascript"> var i=0;</script>
 {% if etiquettes_list %}
-
 
 	{% for etiq in etiquettes_list %}
 	<ul class="list-unstyled">
 
-	<h4><a href="/{{etiq.extraits_id.id}}/contenu">{{etiq.extraits_id.extraits_titre }} </a></h4>
-
-{{etiq.extraits_id.extraits_livre}}
-
-
+		<h4><a href="/{{etiq.extraits_id.id}}/contenu">{{etiq.extraits_id.extraits_titre }}<h6> <span> Cliquer pour accéder<br> aux commentaires </span> </h6></a></h4>{{etiq.extraits_id.extraits_livre}}
+		
 		<div class="jumbotron">
-	 <li><p style="font-family:arial,sans-serif;font-size:100%;color:brown;">{{ etiq.extraits_id.extraits_content}} </p> </li>
-	</div>
+	 		<li><p style="font-family:arial,sans-serif;font-size:100%;color:brown;" class="JS_rech_comme" >{{ etiq.extraits_id.extraits_content}} </p> </li>
 
+		</div>
+	</ul>
 
-</ul>
+	{% endfor %}
 
-{% endfor %}
+<script type="text/javascript">
 
+	for (i=0;i<50;i++) {
+	var x = document.getElementsByClassName("JS_rech_comme"); 
+	var myString = x[i].innerHTML; 
+    var myregex = new RegExp("comme","gm");
+    var str = "COMME";
+    var result=str.fontcolor("blue").italics().bold();
+    var newString=myString.replace(myregex ,result);
+    x[i].innerHTML=newString
+    }
+
+ </script> 
 
 {% else %}
-   	 <p>No proust are available.</p>
+   	 <p>Pas de mots-clés</p>
 {% endif %}
+
 {% endblock %}

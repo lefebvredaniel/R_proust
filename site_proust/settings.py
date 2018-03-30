@@ -64,6 +64,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'site_proust.urls'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'dlemproust@gmail.com'
+EMAIL_HOST_PASSWORD = '5BW-YKa-2cS-uc6'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL='dlemproust@gmail.com'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

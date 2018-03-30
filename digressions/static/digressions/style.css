@@ -30,22 +30,22 @@ p {
 <style>
             /* Règle de base pour le lien */ 
             a{ 
-                color:#blue; 
+                color:#405d27; 
                  
             } 
             a:hover,a:focus{
-                color:#000;
+                color:red;
             }
             
             /* Position et couleur bulle */
             a span{ 
                 position:absolute;
-                margin-top:-200px; 
+                margin-top:-100px; 
                 margin-left:-25px;
-                color:#fff; 
-                background:rgba(100, 100, 0, 0.5); 
-                padding:50px; 
-                border-radius:3px; 
+                color:green; 
+                background:white; 
+                padding:10px; 
+                border-radius:10px; 
                 
                 /* Faire disparaire infobulle par défaut */
                 /* On determine l'origine de la rotation */ 
