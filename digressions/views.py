@@ -15,7 +15,7 @@ from digressions.forms import RechercheForm, CommentForm, ContactForm
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.views.generic import ListView
-from copy import deepcopy
+
 
 """
 View which can render and send email from a contact form.
@@ -331,47 +331,7 @@ def mescommentaires(request):
     return render(request, 'digressions/mescommentaires.html',context)
 
 
-##def message(request):
-##    if request.method == 'POST':  # S'il s'agit d'une requête POST
-##        form = CommentForm(request.POST)  # Nous reprenons les données
-## 
-##
-##        if form.is_valid(): # Nous vérifions que les données envoyées sont valides
-##            print("pas pb")
-## 
-##            # Ici nous pouvons traiter les données du formulaire
-## 
-##            username=request.user.id
-## 
-####            user=User.objects.filter(username=username)
-####            print(user)
-####            for e in user:
-####                print(e.id)
-## 
-##            
-##                
-##            body=form.cleaned_data['message']
-##            objet=form.cleaned_data['objet']
-##            email=form.cleaned_data['email']
-##
-##            print(body)
-##            print(objet)
-##           
-##
-##
-## 
-##
-####            p.save()
-## 
-##            
-##    else:
-##        "Si ce n'est pas du POST, c'est probablement une requête GET"
-##        
-####        form = CommentForm()
-##       
-##    
-##
-##    return render(request, 'digressions/message.html')
+
    
 def contact(request):
     # Construire le formulaire, soit avec les données postées,
@@ -395,7 +355,7 @@ def contact(request):
         # Nous pourrions ici envoyer l'e-mail grâce aux données 
         # que nous venons de récupérer
         if renvoi:
-            send_mail("copie de votre message"+sujet,message,'dlemproust@gmail.com',[envoyeur],fail_silently=False)
+            send_mail("copie de votre message"+"   " +sujet,message,'dlemproust@gmail.com',[envoyeur],fail_silently=False)
         envoi = True
     form=ContactForm()
  
