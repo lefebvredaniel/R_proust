@@ -1,0 +1,49 @@
+{% extends 'digressions/base.html' %}
+{% block content %}
+
+
+<style>
+p.center {
+    text-align: center;
+    color: red;
+}
+
+p.large {
+    font-size: 110%;
+}
+div.ex1 {
+    max-width:1000px;
+    margin: auto;
+    border: 3px solid blue;
+}
+
+</style>
+
+
+<body>
+
+<form
+
+action="/message" method="POST">
+        <div class="form-group">
+           
+            
+            <input type="text" class="form-control" name="objet" placeholder="objet">
+            <input type="textarea" class="form-control" name="body" placeholder="message">
+            <input type="text" class="form-control" name="email" placeholder="email">
+           
+           
+            <input type="submit">
+            {% csrf_token %}
+
+        </div>
+
+
+    </form>
+
+
+
+</body>
+
+ <!-- <h1>{{ question.question_text}} </h1> -->
+ {% endblock %}

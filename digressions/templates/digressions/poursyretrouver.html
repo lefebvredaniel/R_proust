@@ -2,6 +2,7 @@
 {% extends 'digressions/base.html' %}
 {% block content %}
 
+
 <div class="container">
   <div class="text-center">
     <div class="text-primary"><h3> classement alphabétique des mots-clés </h3></div>
@@ -20,13 +21,17 @@
 
        {% else %}
 
-	           <li> <a href="/{{etiq.id}}/detail"> {{ etiq}} {{value}} </a></li>
+	           <li> <a href="/{{etiq.id}}/detail"> <h5>{{ etiq}} {{value}} </h5>
+             </a></li>
         {% endif %}
 		{% endfor %}
 
 
   </ul>
+ 
+
 </footer>
+<div id="bckg1"> </div>
 {% else %}
    	 <p>No proust are available.</p>
 {% endif %}

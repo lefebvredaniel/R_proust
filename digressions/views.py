@@ -39,6 +39,7 @@ def index(request):
 #On affiche toutes les étiquettes en les classant par fréquence (le comptage se fait avec la table relation R_Extraits_Etiquettes) puis par ordre alphabétique
   
     etiquettes_list=Etiquettes.objects.annotate(nb=Count('r_extraits_etiquettes')).order_by('-nb','etiquettes_nom')
+    
  
 
     dico={}
@@ -49,9 +50,18 @@ def index(request):
 ##      <Etiquettes: amour>: 2 etc.}
         
         dico[uneEtiquette]=uneEtiquette.nb
-
+    dicto1={}       
+    extraits_list=Extraits.objects.all()[:3]
+    j=0
+    for i in extraits_list:
+        if len(i.extraits_content)<500:
+    
+            dicto1[j]=i.extraits_content
+            j=j+1
+    print(dicto1)
+    
         
-    context = {'dico':dico}
+    context = {'dico':dico,'dico1':dicto1}
    
 
     return render(request, 'digressions/index.html', context)
@@ -103,6 +113,8 @@ def recherche(request):
 
             # récupération des données 
             mot = form.cleaned_data['mot']
+        else:
+            mot="Proust"
  
             
 
@@ -111,6 +123,7 @@ def recherche(request):
     else:
         # Si ce n'est pas du POST
         form = RechercheForm()  # création d'un formulaire vide
+
  
        
     etiquettes_list=Etiquettes.objects.filter(etiquettes_nom__startswith=mot.lower()).annotate(nb=Count('r_extraits_etiquettes')).order_by('etiquettes_nom')

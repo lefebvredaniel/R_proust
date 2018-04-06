@@ -37,7 +37,7 @@
 	for (i=0;i<50;i++) {
 	var x = document.getElementsByClassName("JS_rech_comme"); 
 	var myString = x[i].innerHTML; 
-    var myregex = new RegExp("comme","gm");
+    var myregex = new RegExp("comme ","gm");
     var str = "COMME";
     var result=str.fontcolor("blue").italics().bold();
     var newString=myString.replace(myregex ,result);
