@@ -6,7 +6,7 @@ django-debug-toolbar-master
 debug_toolbar
 dev.py
 defaults
-settings.py
+settings
 *.sql
 /static
 .DS_Store
