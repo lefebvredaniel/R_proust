@@ -1,9 +1,20 @@
-
+<head>
 {% extends 'digressions/base.html' %}
 {% block content %}
+
+
+
+</head>
+
+
+
+
 <div class="container">
   <div class="text-center">
-    <div class="text-primary"><h3> classement des mots-clés par fréquence</h3></div>
+    <div class="text-primary"><h3> 
+    classement par titre d'extraits</h3>
+     
+</div>
   </div>
 </div>
 
@@ -13,12 +24,27 @@
 
 
 
-
-{% if dico %}
+{% if titre_list %}
 	<ul class="list-unstyled"> 
-		{% for etiq , value in dico.items %}
+		{% for t , id in titre_list.items %}
 
-	<li>  <a href="/{{etiq.id}}/detail"> {{ etiq}} ( {{value}} )</a></li>
+	
+	
+		
+<li>   <a  href="/{{id}}/contenu"> {{t}} </a>
+	
+
+
+
+	 
+
+
+		
+		
+	 </a></li>
+
+
+	 
 		{% endfor %}
     
     </ul>

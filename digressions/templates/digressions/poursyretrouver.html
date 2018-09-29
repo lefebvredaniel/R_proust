@@ -1,37 +1,50 @@
-
-{% extends 'digressions/base.html' %}
-{% block content %}
+<head>
+    {% extends 'digressions/base.html' %} {% block content %}
+</head>
 
 <div class="container">
-  <div class="text-center">
-    <div class="text-primary"><h3> classement alphabétique des mots-clés </h3></div>
-  </div>
+    <div class="text-center">
+        <div class="text-primary">
+            <h3> classement des mots-clés </h3>
+        </div>
+    </div>
 </div>
+<form class="navbar-form navbar-right" action="/poursyretrouverFREQ" method="POST">
+    <div class="form-group">
+
+
+        <!--        <p> <input type="text" class="form-control" name="mot" placeholder="mot clé">-->
+
+        <p> <input type="submit" value="Tri par Fréquence"></p>
+
+        {% csrf_token %}
+    </div>
+</form>
 <footer>
-{% if dico %}
-	<ul class="list-unstyled">
+    {% if dico %}
+    <ul class="list-unstyled">
 
 
-		{% for etiq , value in dico.items %}
-       {% if value == '' %}
-
-          
-         <h5> {{etiq}} </h5>  
-
-       {% else %}
-
-	           <li> <a href="/{{etiq.id}}/detail"> {{ etiq}} {{value}} </a></li>
-        {% endif %}
-		{% endfor %}
+        {% for etiq , value in dico.items %} {% if value == '' %}
 
 
-  </ul>
+        <h5> {{etiq}} </h5>
+
+        {% else %}
+
+        <li>
+            <a href="/{{etiq.id}}/detail">
+                <h5>{{ etiq}} {{value}} </h5>
+            </a>
+        </li>
+        {% endif %} {% endfor %}
+
+
+    </ul>
+
+
 </footer>
+<div id="bckg1"> </div>
 {% else %}
-   	 <p>No proust are available.</p>
-{% endif %}
-
-{% endblock %}
-
-
-
+<p>No proust are available.</p>
+{% endif %} {% endblock %}

@@ -1,3 +1,5 @@
+
+# coding: utf-8
 from django.shortcuts import render
 
 from django.shortcuts import get_object_or_404
@@ -9,7 +11,7 @@ from digressions.models import Extraits, Etiquettes,R_Extraits_Etiquettes, Comme
 
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.db import connection
+# from django.db import connection
 
 from digressions.forms import RechercheForm, CommentForm, ContactForm
 from django.utils import timezone
@@ -38,20 +40,28 @@ def index(request):
 
 #On affiche toutes les étiquettes en les classant par fréquence (le comptage se fait avec la table relation R_Extraits_Etiquettes) puis par ordre alphabétique
 
-    etiquettes_list=Etiquettes.objects.annotate(nb=Count('r_extraits_etiquettes')).order_by('-nb','etiquettes_nom')
+    titre_list=R_Extraits_Etiquettes.objects.order_by('extraits_id').all()
+
+    titre_liste={}
+    init=""
+    for tit in titre_list:
+        if tit.extraits_id==init:
+            pass
+        else:
+
+            init=tit.extraits_id
 
 
-    dico={}
-##   uneEtiquette va représenter une étiquette tirée de etiquettes_list ex. [<Etiquettes: songe>]
-    for uneEtiquette in etiquettes_list:
-
-##on ajoute au dictionnaire "dico" le nombre d'occurrences de l'étiquette uneEtiquette {<Etiquettes: songe>: 1, <Etiquettes: jalousie>: 1,
-##      <Etiquettes: amour>: 2 etc.}
-
-        dico[uneEtiquette]=uneEtiquette.nb
+            titre_liste[tit.extraits_id]=tit.extraits_id_id
 
 
-    context = {'dico':dico}
+
+
+
+
+
+    context = {'titre_list':titre_liste}
+
 
 
     return render(request, 'digressions/index.html', context)
@@ -85,15 +95,47 @@ def poursyretrouver(request):
     ##      <Etiquettes: amour>: 2 etc.}
         nbOccurs=str(uneEtiquette.nb)
         dico[uneEtiquette]='('+nbOccurs+')'
-
+##    commentaires_list=Commentaires.objects.all()
+##    for t in commentaires_list:
+##        print(Extraits.objects.filter(pk=t.titre_id))
 
     context = {'dico':dico}
     return render(request, 'digressions/poursyretrouver.html', context)
 
+def poursyretrouverFREQ(request):
 
+    etiquettes_list=Etiquettes.objects.annotate(nb=Count('r_extraits_etiquettes')).order_by('-nb','etiquettes_nom')
+
+    PL=''
+    dico={}
+    ##   uneEtiquette va représenter une étiquette tirée de etiquettes_list ex. [<Etiquettes: songe>]
+    for uneEtiquette in etiquettes_list:
+
+        nomEtiquette=Etiquettes.objects.get(id=uneEtiquette.id).etiquettes_nom
+
+
+        # if (PL!=nomEtiquette[0]):
+
+        #     A=str(nomEtiquette[0])
+
+        #     dico[A.upper]=''
+
+
+
+
+    ##on ajoute au dictionnaire "dico" le nombre d'occurrences de l'étiquette uneEtiquette {<Etiquettes: songe>: 1, <Etiquettes: jalousie>: 1,
+    ##      <Etiquettes: amour>: 2 etc.}
+        nbOccurs=str(uneEtiquette.nb)
+        dico[uneEtiquette]='('+nbOccurs+')'
+##    commentaires_list=Commentaires.objects.all()
+##    for t in commentaires_list:
+##        print(Extraits.objects.filter(pk=t.titre_id))
+
+    context = {'dico':dico}
+    return render(request, 'digressions/poursyretrouver.html', context)
 ##################                                                      RECHERCHER                           ###########
 
-def recherche(request):
+def recherche1(request):
     if request.method == 'POST':  # S'il s'agit d'une requête POST
         form = RechercheForm(request.POST)  # Nous reprenons les données
 
@@ -103,6 +145,8 @@ def recherche(request):
 
             # récupération des données
             mot = form.cleaned_data['mot']
+        else:
+            mot="???"
 
 
 
@@ -111,6 +155,7 @@ def recherche(request):
     else:
         # Si ce n'est pas du POST
         form = RechercheForm()  # création d'un formulaire vide
+
 
 
     etiquettes_list=Etiquettes.objects.filter(etiquettes_nom__startswith=mot.lower()).annotate(nb=Count('r_extraits_etiquettes')).order_by('etiquettes_nom')
@@ -124,9 +169,58 @@ def recherche(request):
         B=str(uneEtiquette.nb)
         dico[uneEtiquette]='('+B+')'
 
-    context = {'dico':dico}
-    return render(request, 'digressions/recherche.html', context)
+    context = {'dico':dico, 'mot':mot}
+    
+    return render(request, 'digressions/recherche1.html', context)
 
+def recherche(request):
+    if request.method == 'POST':  # S'il s'agit d'une requête POST
+        form = RechercheForm(request.POST)  # Nous reprenons les données
+
+
+        if form.is_valid(): # vérifications que les données sont valides
+
+
+            # récupération des données
+            mot = form.cleaned_data['mot']
+        else:
+            mot="???"
+
+
+
+
+
+    else:
+        # Si ce n'est pas du POST
+        form = RechercheForm()  # création d'un formulaire vide
+
+
+
+    titre_list=Extraits.objects.filter(extraits_content__icontains=mot.lower()).annotate (nb=Count('extraits_content')).order_by('extraits_titre')
+
+
+
+
+    somme=0
+    dico={}
+##    ##   uneEtiquette va représenter une étiquette tirée de etiquettes_list ex. [<Etiquettes: songe>]
+
+
+##    ##on ajoute au dictionnaire "dico" le nombre d'occurrences de l'étiquette uneEtiquette {<Etiquettes: songe>: 1, <Etiquettes: jalousie>: 1,
+##    ##      <Etiquettes: amour>: 2 etc.}
+
+
+    for t in titre_list:
+       somme=somme+t.nb
+      
+       dico[t.id]=(t.extraits_titre)
+
+
+
+    
+    context = {'dico':dico,'somme':somme,'mot':mot}
+    
+    return render(request, 'digressions/recherche.html', context)
 #######################                                 LIENS INTERESSANTS                   ####################
 
 def liensinteressants(request):
@@ -313,7 +407,7 @@ def modifier(request,id):
  #   liste_comment=Commentaires.objects.filter(author_id=username).order_by('-date')
  #   comment=Commentaires.objects.filter(author_id=request.user.id).order_by ('-date')
     context={'titre': titre, 'commentaires': comment}
-    print(context)
+
 
 
     return render(request, 'digressions/contenu.html', context)
@@ -324,8 +418,8 @@ def modifier(request,id):
 def mescommentaires(request):
 
     comment=Commentaires.objects.filter(author_id=request.user.id).order_by ('-date')
-    extraits=Extraits.objects.all()
-    context={'commentaires':comment,'extraits':extraits}
+##    extraits=Extraits.objects.all()
+    context={'commentaires':comment}
 
 
     return render(request, 'digressions/mescommentaires.html',context)
@@ -338,7 +432,7 @@ def contact(request):
     # soit vide si l'utilisateur accède pour la première fois
     # à la page.
     form = ContactForm(request.POST or None)
-    # Nous vérifions que les données envoyées sont valides
+
     # Cette méthode renvoie False s'il n'y a pas de données
     # dans le formulaire ou qu'il contient des erreurs.
 
@@ -355,7 +449,7 @@ def contact(request):
         # Nous pourrions ici envoyer l'e-mail grâce aux données
         # que nous venons de récupérer
         if renvoi:
-            send_mail("copie message"+"   " +sujet,message,'dlemproust@gmail.com',[envoyeur],fail_silently=False)
+            send_mail("copie de votre message"+"   " +sujet,message,'dlemproust@gmail.com',[envoyeur],fail_silently=False)
         envoi = True
     form=ContactForm()
 

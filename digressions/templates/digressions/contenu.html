@@ -1,13 +1,20 @@
+
+
+<head>
 {% extends 'digressions/base.html' %}
 {% block content %}
 <style>
+input {color:black;}
 div.ex1 {
     max-width:1000px;
     margin: auto;
-    border: 3px solid blue;
+    border: 3px black;
 
 }
 </style>
+
+</head>
+
 <body>
 
 <div class="text-center">
@@ -22,7 +29,7 @@ div.ex1 {
 	<script type="text/javascript">
 
 	 var str = document.getElementById("rempl.comme").innerHTML; 
-    var txt = str.replace("comme","COMME");
+    var txt = str.replace("comme ","COMME ");
     document.getElementById("rempl.comme").innerHTML = txt;
 
     </script> 
@@ -32,9 +39,9 @@ div.ex1 {
 	     
 		{% for c in commentaires %}
 
-   			<form action="" method="POST"
-				 Votre commentaire sur ce texte...:<br>
-				<textarea id="commentaires" type="textarea" name="commentaires" rows="5" cols="200"> {{c.body}} </textarea>
+   			<form action="" method="POST">
+				<P Votre commentaire sur ce texte...:<P>
+				<textarea  id="commentaires" type="textarea" name="commentaires" rows="5"  cols="120"> {{c.body}} </textarea>
 				<input type="submit"> modification prise en compte ( {{c.date}})
     			{% csrf_token %}
 			</form>
@@ -42,10 +49,10 @@ div.ex1 {
 		{% endfor %}
 	
 	{% else %}
-		<form action="" method="POST"
-			Votre commentaire sur ce texte...:<br>
-			<textarea id="commentaires" type="textarea" name="commentaires" rows="5" cols="200"> </textarea>
-			<input type="submit">
+		<form action="" method="POST">
+			Votre commentaire sur ce texte...:<P>
+			<textarea  id="commentaires" type="textarea" name="commentaires" rows="5" cols="120">  </textarea>
+			<input type="submit" >
     		{% csrf_token %}
 
 		</form>
@@ -61,7 +68,7 @@ div.ex1 {
 		<br>
 	 <div class="ex1"> 
 		<ul class="list-unstyled">
-			<p> le  {{d.date}} 
+			<p> le  {{d.date}}  
 		  
 		  		{% if user.id == d.author_id  %}
 		  		{{d.author}}
@@ -99,6 +106,12 @@ div.ex1 {
 		{% endif %}
 
 	{% endfor %}
+{% else %}
+	
+
+    	<h5> Pas encore de commentaires </h5>
+
+   
 
 {% endif %}
 

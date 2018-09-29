@@ -1,91 +1,164 @@
-
+<html>
 {% load static %}
 
-<head>
-  <title>Proust</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="{% static 'digressions/style.css' %}" >
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-</head>
+<title>danslaparenthese</title>
+<META NAME="description" CONTENT="Proust et la pertinence de ses comparaisons">
+<META NAME="keywords" CONTENT="Proust,digression">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'digressions/style.css' %}">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+<script language="JavaScript">
+    function display_photo(p_name, p_w, p_h, p_legend) {
+        if (self.innerWidth) {
+            winwidth = self.innerWidth;
+            winheight = self.innerHeight;
+        } else if (document.documentElement && document.documentElement.clientWidth) {
+            winwidth = document.documentElement.clientWidth;
+            winheight = document.documentElement.clientHeight;
+        } else if (document.body) {
+            winwidth = document.body.clientWidth;
+            winheight = document.body.clientHeight;
+        }
+        if (Number(p_w) < winwidth) winwidth = Number(p_w);
+        if (Number(p_h) < winheight) winheight = Number(p_h);
+        winwidth += 30;
+        winheight += 60;
+        pwin = window.open('', 'combray', "toolbar=no,location=yes,directories=no,status=yes,menubar=no,resizable=no,scrollbars=no,copyhistory=no,width=" + winwidth + ",height=" + winheight + ",left=100,top=180");
+
+        pwin.document.write("<html><head>");
+        pwin.document.write("<title>Zoom</title>");
+        pwin.document.write("<style type=text/css>");
+        pwin.document.write("body {");
+        pwin.document.write("margin:5 5 5 5;");
+        pwin.document.write("padding:5;5 5 5");
+        pwin.document.write("color:red;");
+        pwin.document.write("background-color:white; }");
+        pwin.document.write("</style>");
+        pwin.document.write("</head>");
+        pwin.document.write("<body>");
+        pwin.document.write("<img src=" + p_name + " width=" + p_w + " height=" + p_h + ">");
+        pwin.document.write("<table noborder width=100%><tr>");
+        pwin.document.write("<form><td align=left>" + p_legend + "</td>");
+        pwin.document.write("<td align=right><input type='button' value='Fermer' onClick='window.close()'></td>");
+        pwin.document.write("</tr></table></form>");
+        pwin.document.write("</body></html>");
+    }
+
+</script>
 
 <body>
-<div class="container-fluid">
-   <h1> <div class="text-center"><strong>les "comme..." de Proust  </strong> </h1><div>
-  <div class="container">
-     <section class="row">
-    <div class="col-xs-4 col-sm-3 col-md-2"><img src="/static/digressions/images/IMG_0195.png"   class="img-responsive" alt="combray" width="250" height="197"> </div>
-    <div class="col-xs-4 col-sm-3 col-md-2"><img src="/static/digressions/images/IMG_0195.png"   class="img-responsive" alt="combray" width="250" height="197"> </div>
-    <div class="col-xs-4 col-sm-3 col-md-2"><img src="/static/digressions/images/IMG_0195.png"   class="img-responsive" alt="combray" width="224" height="177"> </div>
-    <div class="col-xs-4 col-sm-3 col-md-2"><img src="/static/digressions/images/IMG_0195.png"   class="img-responsive" alt="combray" width="224" height="177"> </div>
-    <div class="col-xs-4 col-sm-3 col-md-2"><img src="/static/digressions/images/IMG_0195.png"   class="img-responsive" alt="combray" width="224" height="177"> </div>
-    <div class="col-xs-4 col-sm-3 col-md-2"><img src="/static/digressions/images/IMG_0195.png"   class="img-responsive" alt="combray" width="224" height="177"> </div>
-  </section>
-</div>
-<nav class="navbar navbar-inverse">
-  <div class="container">
-    <div class="navbar-header">
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="inactive"><a href="/">Accueil</a></li>
-      <li><a href="/apropos">A propos</a></li>
-      <li><a href="/poursyretrouver">Pour s'y retrouver</a></li>
-      <li><a href="/liensinteressants">liens intéressants</a></li>
-      {% if user.is_authenticated %}
 
-          <li><a href="#">{{user.username }}</a> </li>
-          <li><a href="{% url 'logout' %}">déconnexion</a></li>
-           <li><a href="/mescommentaires"> mes commentaires</a></li>
+    <div class="container-fluid">
+
+        <h1>
+            <div class="text-center"><strong>les "comme..." de Proust  </strong></div>
+        </h1>
+        <h4>
+            <div class="text-center">le "comme...", comme une digression, comme une parenthèse </div>
+        </h4>
+
+
+        <div class="container">
+
+            <section class="row">
+
+
+                <div class="col-xs-2 col-sm-3 col-md-2 col-lg-2"> <a href="javascript:display_photo('/static/digressions/images/IMG_0195.png','800','525','Une promenade à Combray')">
+      <img src="/static/digressions/images/IMG_0195.png" class="img-responsive" alt="combray" width="300" height="197" ></a></div>
 
 
 
-      {% else %}
-        <li><a href="/accounts/login">se connecter <span> Eventuellement s'inscrire auparavant pour écrire des commentaires </span>
-        </a></li>
-        <li><a href="/accounts/signup">s'inscrire <span> S'inscrire permet de se connecter et d'écrire des commentaires </span></a></li>
+                <div class="col-xs-2 col-sm-3 col-md-2 col-lg-2"><a href="#"><img src="/static/digressions/images/aubepine-z.png"   class="img-responsive" alt="combray" width="300" height="197"> <span> « Je revenais devant les aubépines COMME devant ces chefs-d'œuvre dont on croit qu'on saura mieux les voir quand on a cessé un moment de les regarder... </span> </a> </div>
 
 
 
 
-      {% endif %}
+
+                <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2"><a href="#"><img src="/static/digressions/images/proust1.png"   class="img-responsive" alt="combray" width="150" height="100" ><span> Marcel Proust(1871-1922)</span></a>
+                </div>
+
+                <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2"><a href="#"><img src="/static/digressions/images/proust2.png"   class="img-responsive" alt="combray" width="150" height="100" ><span><strong>A LA RECHERCHE DU TEMPS PERDU </strong>
+        <br> .. Du côté de chez Swann <br> ..  A l'ombre des jeunes filles en fleurs<br> .. Le côté de Guermantes<br> .. Sodome et Gomorrhe<br> .. La prisonnière <br>  .. Albertine disparue<br>  .. Le temps retrouvé </span></a></div>
 
 
-    </ul>
-
-    <form class="navbar-form navbar-right"
-      action="/recherche" method="POST">
-        <div class="form-group">
+                <div class="col-xs-2 col-sm-3 col-md-2 col-lg-2"><a href="#"><img src="/static/digressions/images/madeleine.png"   class="img-responsive" alt="combray" width="300" height="197"> <span> ...je portai à mes lèvres une cuillerée du thé où j'avais laissé s'amollir un morceau de madeleine. Mais à l'instant même où la gorgée mêlée des miettes du gâteau toucha mon palais, je tressaillis, attentif à ce qui se passait d'extraordinaire en moi. Un plaisir délicieux m'avait envahi, isolé, sans la notion de sa cause. </span> </a>
 
 
-            <input type="text" class="form-control" name="mot" placeholder="mot recherché"
+                </div>
 
-            <input type="submit">
-            {% csrf_token %}
+
+
+
+                <div class="col-xs-2 col-sm-3 col-md-2 col-lg-2"><img src="/static/digressions/images/IMG_0195.png" class="img-responsive" alt="combray" width="300" height="197"></div>
+
+            </section>
+
+
+            <!-- <img src="/static/digressions/images/combray.jpg"  alt="combray" width="940" height="198" class="img-responsive center-block"/> -->
+
+
 
         </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="inactive"><a href="/">Accueil</a></li>
+                    <li><a href="/apropos">A propos</a></li>
+                    <li><a href="/poursyretrouver">Mots clés alpha <span> mots clés triés par ordre alphabétique </span></a></li>
+                    <li><a href="/liensinteressants">Autour de Proust</a></li>
+                    {% if user.is_authenticated %}
+
+                    <li><a href="#">{{user.username }}</a> </li>
+                    <li><a href="{% url 'logout' %}">déconnexion</a></li>
+                    <li><a href="/mescommentaires"> mes commentaires</a></li>
 
 
-    </form>
+
+                    {% else %}
+
+                    <li><a href="/accounts/login">se connecter <span> Se connecter permet d'écrire des commentaires; login non publié </span>
+          </a></li>
 
 
+                    {% endif %}
 
-  </div>
-</nav>
-</div>
+
+                </ul>
+
+                <form class="navbar-form navbar-right" action="/recherche" method="POST">
+                    <div class="form-group">
+
+
+                        <p> <input type="text" class="form-control" name="mot" placeholder="mot recherché">
+
+                            <input type="submit"></p>
+
+                        {% csrf_token %}
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+    <div id="bckg1"> </div>
+
+</body>
+
 <body>
 
-{% block content %}
-{% endblock %}
+    {% block content %} {% endblock %}
 
 </body>
 
 </html>
-
-
-
-
-

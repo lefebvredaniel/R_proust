@@ -2,11 +2,12 @@
 {% extends 'digressions/base.html' %}
 {% block content %}
 
-
-<h2>SE CONNECTER...</h2>
+ <a href="/accounts/signup" class="btn btn-primary btn-lg " role="button" >Cliquer ici si pas encore inscrit ?</a> <br><br>
+<h3>SE CONNECTER...</h3>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Login</button>
+  <button type="submit"><p>Login</p>
+  </button>
 </form>
  {% endblock %}

@@ -1,15 +1,53 @@
+<head>
+
+
+
 {% extends 'digressions/base.html' %}
 {% block content %}
-<body>
-{% if dico %}
-	<ul class="list-unstyled">
-		{% for etiq , value in dico.items %}
+</head>
 
-	<li> <h4> <a href="/{{etiq.id}}/detail"> {{ etiq}}  {{value}} </a></h4></li>
+
+<body>
+
+{% if somme %}
+<div class="container">
+  <div class="text-center">
+    <div class="text-primary"> <h4>{{mot}}...apparaît dans  {{somme}}  extrait{{somme|pluralize}}  du site </h4>
+    </div>
+  </div>
+</div>
+
+
+
+{%endif%}
+
+
+{% if dico %}
+
+	<ul class="list-unstyled">
+		{% for idTitre, titre  in dico.items %}
+
+	<li> <h4> <a href="/{{idTitre}}/contenu">   {{titre}} </a></h4></li>
 		{% endfor %}
     </ul>
 {% else %}
-      <h3> ce mot n'existe pas dans la liste élaborée</h3>
+	{% if "???" in mot %}
+		<h4> entrez un mot dans la zone de recherche</h4>
+	{% else %}
+
+
+	<h4> {{mot}}... n'existe pas dans les extraits choisis</h4>
+	{% endif %}
+
+
+
+
+
+
+
+
+
+
 {% endif %}
 
 

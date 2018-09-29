@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mey6c(0=7-qu6hda*qs^)iewviurx508&n)o!0frh6v0^x#e8='
 
 
-ALLOWED_HOSTS = ['daniellefebvre.pythonanywhere.com']
+ALLOWED_HOSTS = ['www.danslaparenthese.com','danslaparenthese.com']
 
 
 LOGIN_REDIRECT_URL = '/'

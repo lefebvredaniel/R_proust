@@ -1,5 +1,9 @@
+
+<head>
 {% extends 'digressions/base.html' %}
 {% block content %}
+</head>
+
 
 
 
@@ -12,15 +16,16 @@
 	{% for c in commentaires %}
 	
 	<ul class="list-unstyled">
+
 		
 
-		<p> <a href="/{{c.titre_id}}/contenu">{{c.titre}} </a></p>
+		<p> <a href="/{{c.titre_id}}/contenu">{{c.titre}} </a> ..........................dernière modification le  {{c.date}} </p>
 
 
 
-		  le  {{c.date}}</p>
-		<div class="jumbotron">
-	 <li><p style="font-family:verdana;font-size:100%;color:brown;">
+
+		<!-- <div class="jumbotron"> -->
+	 <li><p style="font-family:verdana;font-size:100%;color:black;">
 		{{c}} </p></li>
 
 <div class="container">

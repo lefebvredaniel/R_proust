@@ -1,10 +1,13 @@
+
+<head>
+
 {% extends 'digressions/base.html' %}
 {% block content %}
 
 
 <style>
 p.center {
-    text-align: center;
+    text-align: right;
     color: red;
 }
 
@@ -12,32 +15,44 @@ p.large {
     font-size: 110%;
 }
 div.ex1 {
-    max-width:1000px;
+    max-width:700px;
     margin: auto;
-    border: 3px solid blue;
+    border: 3px black;
+}
+div.block {
+	max-width:320px;
+	float:left;
+	margin:10px
+	padding:50px;
 }
 
-
 </style>
+</head>
 
 <body>
-<div class="ex1"> 	
-<p class="left large"> Lire la Recherche peut se faire, une fois la curiosité de l’histoire satisfaite, de multiples manières.  <br> <br>
-
-L’une est d’en apprécier les digressions qui pourraient tout autant se trouver dans n’importe quel autre ouvrage et qui sont l’une des richesses du roman de Proust 
-La pertinence des "...comme" qui parsèment son oeuvre ne peut laisser indifférent et rend  admiratif : il a vu et décrit ce qui crève les yeux et qu'on n'a pas su voir et décrire. Parfois, il n' a pas de "...comme" mais le propos reste générique, c'est pour cela qu'il figure ici</p> </div>
-<br>
-
-
-	 <p style="font-family:cursive;font-size:150%;color:brown;font-style: italic; text-align:center;">…COMME ceux qui partent en voyage pour voir de leurs yeux une cité désirée et s’imaginent qu’on peut goûter dans une réalité le charme du songe. </p> 
+	<div class="block">
 	
-<br>
+		<p> Marcel Proust <img src="/static/digressions/images/proust3.png"   class="img-responsive" alt="combray" width="150" height="100" ></p>
+		<p>  né à Paris le 10 juillet 1871 </p>
+		<p> mort à Paris le 18 novembre 1922</p>
+	</div>
+
+	
+
+
 <div class="ex1"> 	
-<p class="left large"> L'auteur de ce site assume la responsabilité du choix des titres des extraits et des mots clés</p>
+<p class="right large" style="background-color:bisque;""> Lire la Recherche peut se faire, une fois la curiosité de l’histoire satisfaite, de multiples manières.   <br>
+
+L’une est d’en apprécier les digressions qui pourraient tout autant se trouver dans n’importe quel autre ouvrage et qui sont l’une des richesses du roman de Proust.
+La pertinence des "...comme" qui parsèment son oeuvre ne peut laisser indifférent et rend  même admiratif : il a vu et décrit ce qui crève les yeux et qu'on n'a pas su voir et décrire. Parfois, il n' y a pas de "...comme" mais le propos reste générique, c'est pour cela qu'il figure ici</p> </div>
+<br>
+
+
+<div class="ex1"> 	
+<p class="left large" style="background-color:bisque;"> L'auteur de ce site assume la responsabilité du choix, des titres des extraits et des mots clés </p><br>
 </div>
 
-
-
+<marquee  behavior="slide"  style="font-family:cursive;font-size:130%;color:bisque;font-style: italic;">…COMME ceux qui partent en voyage pour voir de leurs yeux <br> une cité désirée et s’imaginent qu’on peut goûter dans une réalité le charme du songe. Marcel Proust </marquee> <br><br><br>
 
 
 <h4> <a href="/contact"  >Contact </a></h4>
