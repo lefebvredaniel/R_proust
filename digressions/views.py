@@ -40,19 +40,28 @@ def index(request):
 
 #On affiche toutes les étiquettes en les classant par fréquence (le comptage se fait avec la table relation R_Extraits_Etiquettes) puis par ordre alphabétique
 
-    titre_list=R_Extraits_Etiquettes.objects.order_by('extraits_id').all()
-
-    titre_liste={}
-    init=""
-    for tit in titre_list:
-        if tit.extraits_id==init:
-            pass
-        else:
-
-            init=tit.extraits_id
+    titre_list=Extraits.objects.all()
 
 
-            titre_liste[tit.extraits_id]=tit.extraits_id_id
+    # titre_liste={}
+    # init=""
+    # for tit in titre_list:
+    #     if tit.extraits_titre==init:
+    #         pass
+    #     else:
+
+    #         init=tit.extraits_titre
+
+    #     # if Commentaires.objects.filter(titre_id=tit.extraits_id_id):
+    #     #     tit.extraits_id=tit.extraits_id+"EE"
+    #     titre_liste[tit.extraits_id_id]=tit.extraits_id 
+    #     print(tit.extraits_titre)
+
+            
+    for indice in titre_list:
+        if Commentaires.objects.filter(titre_id=indice.id):
+            indice.extraits_titre=indice.extraits_titre+"***"
+           
 
 
 
@@ -60,7 +69,8 @@ def index(request):
 
 
 
-    context = {'titre_list':titre_liste}
+    context = {'titre_list':titre_list}
+    
 
 
 
@@ -233,13 +243,30 @@ def liensinteressants(request):
 #####################                                  AFFICHAGE DE TOUTES LES EXTRAITS  POSSEDANT LA MEME ETIQUETTE (etiq_id)    ##############
 
 def detail(request, etiq_id):
+    
+    
 
 ##extraction de toutes les lignes qui ont l'étiquette sélectionnée dans l'écran précédent (etiq_id)
 ## à partir de la table relation R_Extraits_...
     selection_list= R_Extraits_Etiquettes.objects.filter(etiquettes_id_id=etiq_id)
+   
 
-## selection du nom de l'étiquette sélectionnée (transmise par son id)
-    nom_etiquette = Etiquettes.objects.filter(id=etiq_id)
+    for indice_lect in selection_list :
+        
+       
+        
+        if Commentaires.objects.filter( titre_id=indice_lect.extraits_id_id):
+            print(Commentaires.objects.filter( titre_id=indice_lect.extraits_id_id))
+        
+        
+        
+            indice_lect.extraits_id.extraits_titre =indice_lect.extraits_id.extraits_titre+"***"
+   
+   
+    
+   ## selection du nom de l'étiquette sélectionnée (transmise par son id)
+    nom_etiquette = Etiquettes.objects.filter(id=etiq_id) 
+
 
 ##    dico_tit={}
 ##    for t in selection_list:
@@ -248,7 +275,9 @@ def detail(request, etiq_id):
 ##        z=R_Extraits_Etiquettes.objects.filter(extraits_id_id=y).values()
 ##
 ##
+    
     context={'etiquettes_list':selection_list,'nom_etiquette':nom_etiquette}
+    
     return render(request, 'digressions/detail.html',context)
 
 ####################################################AFFICHAGE DE L'EXTRAIT D'UN TITRE ET DES COOMENTAIRES QUI LUI SONT RATTACHES   ###########
@@ -275,6 +304,7 @@ def contenu(request, titre_id):
                 p.save()
 
     liste_comment=Commentaires.objects.filter(titre_id=titre_id).order_by('author_id','-date')
+
 
 
     return render(request, 'digressions/contenu.html', {'titre': titreEnClair,'liste_comment':liste_comment})

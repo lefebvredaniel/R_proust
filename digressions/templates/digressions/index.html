@@ -1,6 +1,5 @@
 <head>
-{% extends 'digressions/base.html' %}
-{% block content %}
+    {% extends 'digressions/base.html' %} {% block content %}
 
 
 
@@ -10,12 +9,14 @@
 
 
 <div class="container">
-  <div class="text-center">
-    <div class="text-primary"><h3> 
-    classement par titre d'extraits</h3>
-     
-</div>
-  </div>
+    <div class="text-center">
+        <div class="text-primary">
+            <h3>
+                classement par titre d'extraits</h3>
+            <h6 style="font-family: arial;font-size:110%;font-style: italic;color:bisque"> Les astérisques indiquent que l'extrait est commenté : cliquez sur le mot pour faire apparâitre le commentaire</h6>
+
+        </div>
+    </div>
 </div>
 
 
@@ -24,42 +25,31 @@
 
 
 
-{% if titre_list %}
-	<ul class="list-unstyled"> 
-		{% for t , id in titre_list.items %}
 
-	
-	
-		
-<li>   <a  href="/{{id}}/contenu"> {{t}} </a>
-	
+
+    {% if titre_list %}
+    <ul class="list-unstyled">
+        {% for t in titre_list %}
 
 
 
-	 
+
+        <li>
+            <a href="/{{t.id}}/contenu"> {{t}} 
 
 
-		
-		
-	 </a></li>
+            </a>
 
 
-	 
-		{% endfor %}
-    
+
+        </li>
+
+
+
+        {% endfor %}
+
     </ul>
- </footer>
+</footer>
 {% else %}
-   	 <p>pas de mots-clés</p>
-{% endif %}
-
-
-</div>
-
-{% endblock %}
-
-
-
-
-
-
+<p>pas de mots-clés</p>
+{% endif %} {% endblock %}

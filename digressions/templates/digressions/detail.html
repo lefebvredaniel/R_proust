@@ -1,54 +1,49 @@
-{% extends 'digressions/base.html' %}
-{% block content %}
-
-
-
-
-{% for nom_etiq in nom_etiquette %}
+{% extends 'digressions/base.html' %} {% block content %} {% for nom_etiq in nom_etiquette %}
 <div class="container">
 
     <div class="text-center">
-		<div class="text-primary"><h2>Extraits pour le mot-clé.....{{nom_etiq}}</h2>
-		<h6 style="font-family: arial;font-size:110%;font-style: italic;color:bisque"> cliquez sur les mots soulignés pour voir les éventuels commentaires et ajoutez-en en vous connectant </h6>
-		</div>
-	</div>
+        <div class="text-primary">
+            <h2>Extraits pour le mot-clé.....{{nom_etiq}}</h2>
+            <h6 style="font-family: arial;font-size:110%;font-style: italic;color:bisque"> Les astérisques indiquent que l'extrait est commenté : cliquez sur le mot pour faire apparâitre le commentaire</h6>
+        </div>
+    </div>
 </div>
 
 {% endfor %}
 
 
-<script type="text/javascript"> var i=0;</script>
-{% if etiquettes_list %}
+<script type="text/javascript">
+    var i = 0;
 
-	{% for etiq in etiquettes_list %}
-	<ul class="list-unstyled">
+</script>
+{% if etiquettes_list %} {% for etiq in etiquettes_list %}
+<ul class="list-unstyled">
 
-		<h4><a href="/{{etiq.extraits_id.id}}/contenu">{{etiq.extraits_id.extraits_titre }} <span> Cliquer pour accéder<br> aux commentaires </span> </a></h4>{{etiq.extraits_id.extraits_livre}}
+    <h4><a href="/{{etiq.extraits_id.id}}/contenu">{{etiq.extraits_id.extraits_titre }} <span> Cliquer pour accéder<br> aux commentaires </span> </a></h4>{{etiq.extraits_id.extraits_livre}}
 
-		<div class="jumbotron">
-	 		<li><p style="font-family:arial,sans-serif;font-size:100%;color:brown;" class="JS_rech_comme" >{{ etiq.extraits_id.extraits_content}} </p> </li>
+    <div class="jumbotron">
+        <li>
+            <p style="font-family:arial,sans-serif;font-size:100%;color:brown;" class="JS_rech_comme">{{ etiq.extraits_id.extraits_content}} </p>
+        </li>
 
-		</div>
-	</ul>
+    </div>
+</ul>
 
-	{% endfor %}
+{% endfor %}
 
 <script type="text/javascript">
-
-	for (i=0;i<50;i++) {
-	var x = document.getElementsByClassName("JS_rech_comme");
-	var myString = x[i].innerHTML;
-    var myregex = new RegExp("comme","gm");
-    var str = "COMME";
-    var result=str.fontcolor("blue").italics().bold();
-    var newString=myString.replace(myregex ,result);
-    x[i].innerHTML=newString
+    for (i = 0; i < 50; i++) {
+        var x = document.getElementsByClassName("JS_rech_comme");
+        var myString = x[i].innerHTML;
+        var myregex = new RegExp("comme", "gm");
+        var str = "COMME";
+        var result = str.fontcolor("blue").italics().bold();
+        var newString = myString.replace(myregex, result);
+        x[i].innerHTML = newString
     }
 
- </script>
+</script>
 
 {% else %}
-   	 <p>Pas de mots-clés</p>
-{% endif %}
-
-{% endblock %}
+<p>Pas de mots-clés</p>
+{% endif %} {% endblock %}
