@@ -248,14 +248,15 @@ def detail(request, etiq_id):
 
 ##extraction de toutes les lignes qui ont l'étiquette sélectionnée dans l'écran précédent (etiq_id)
 ## à partir de la table relation R_Extraits_...
-    selection_list= R_Extraits_Etiquettes.objects.filter(etiquettes_id_id=etiq_id)
+    selection_list= R_Extraits_Etiquettes.objects.filter(etiquettes_id=etiq_id)
    
 
     for indice_lect in selection_list :
         
        
         
-        if Commentaires.objects.filter( titre_id=indice_lect.extraits_id_id):
+        if Commentaires.objects.filter(titre_id=indice_lect.extraits_id):
+            print(Commentaires.objects.filter( titre_id=indice_lect.extraits_id))
             print(Commentaires.objects.filter( titre_id=indice_lect.extraits_id_id))
         
         
