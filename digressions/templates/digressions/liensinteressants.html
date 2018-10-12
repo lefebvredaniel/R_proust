@@ -48,6 +48,7 @@
                             <li><a href="/apropos">A propos</a></li>
                             <li><a href="/poursyretrouver">Mots Clés alpha <span> mots clés triés par ordre alphabétique </span></a></li>
                             <li><a href="/liensinteressants">Autour de Proust</a></li>
+                            <li><a href="/grammaire">Un peu de style</a></li>
                             {% if user.is_authenticated %}
 
                             <li><a href="#">{{user.username }}</a> </li>
@@ -57,7 +58,7 @@
 
 
                             {% else %}
-                            <li><a href="/accounts/signup">s'inscrire <span> S'inscrire permet de se connecter et d'écrire des commentaires </span></a></li>
+
                             <li><a href="/accounts/login">se connecter <span> Eventuellement s'inscrire auparavant pour écrire des commentaires </span>
         </a></li>
 

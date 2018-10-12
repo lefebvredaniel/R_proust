@@ -58,16 +58,10 @@
 </script>
 
 <body>
-    <script type="text/javascript" src="//compteur.websiteout.com/js/12/5/100/1">
 
 
-    </script>
 
 
-    </script>
-
-
-    </script>
 
     <div class="container-fluid">
 
@@ -129,10 +123,12 @@
                     <li><a href="/apropos">A propos</a></li>
                     <li><a href="/poursyretrouver">Mots clés alpha <span> mots clés triés par ordre alphabétique </span></a></li>
                     <li><a href="/liensinteressants">Autour de Proust</a></li>
+                    <li><a href="/grammaire">un peu de style <span> par Ilaria Vidotto </span></a></li>
                     {% if user.is_authenticated %}
 
                     <li><a href="#">{{user.username }}</a> </li>
-                    <li><a href="{% url 'logout' %}">déconnexion</a></li>
+                    <li>
+                        <a href="{% url 'logout' %}">déconnexion</a></li>
                     <li><a href="/mescommentaires"> mes commentaires</a></li>
 
 
