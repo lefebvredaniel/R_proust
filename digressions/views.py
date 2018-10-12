@@ -256,8 +256,7 @@ def detail(request, etiq_id):
        
         
         if Commentaires.objects.filter(titre_id=indice_lect.extraits_id):
-            print(Commentaires.objects.filter( titre_id=indice_lect.extraits_id))
-            print(Commentaires.objects.filter( titre_id=indice_lect.extraits_id_id))
+            
         
         
         
@@ -338,7 +337,7 @@ def supprimer1(request,id,titre_id):
     liste_comment=Commentaires.objects.filter(titre_id=titre_id).order_by('author_id','-date')
     titre = get_object_or_404(Extraits, pk=titre_id)
     context={'titre': titre,'liste_comment':liste_comment}
-    print(context)
+   
 
     return render(request, 'digressions/contenu.html',context)
 
@@ -398,8 +397,7 @@ def modifier(request,id):
 
     username=request.user.id
 
-    for t in comment:
-        print(t.id)
+    
 
     context={'commentaires':comment}
 
@@ -455,7 +453,14 @@ def mescommentaires(request):
 
     return render(request, 'digressions/mescommentaires.html',context)
 
+def grammaire(request):
 
+   
+##    
+    context={}
+
+
+    return render(request, 'digressions/grammaire.html',context)
 
 
 def contact(request):

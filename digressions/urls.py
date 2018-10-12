@@ -17,6 +17,7 @@ urlpatterns = [
     path('poursyretrouver',views.poursyretrouver, name='poursyretrouver'),
     path('poursyretrouverFREQ',views.poursyretrouverFREQ, name='poursyretrouverFREQ'),
     path('liensinteressants',views.liensinteressants, name='liensinteressants'),
+    path('grammaire',views.grammaire, name='liensinteressants'),
     path('mescommentaires',views.mescommentaires, name='mescommentaires'),
     path('<int:id>/mescommentaires/asupprimer',views.supprimer, name='supprimer'),
     path('<int:id>/mescommentaires/amodifier',views.modifier, name='modifier'),
