@@ -82,7 +82,12 @@ def apropos(request):
 
 def poursyretrouver(request):
 
+    
+
     etiquettes_list=Etiquettes.objects.annotate(nb=Count('r_extraits_etiquettes')).order_by('etiquettes_nom')
+    
+   
+    
 
     PL=''
     dico={}
