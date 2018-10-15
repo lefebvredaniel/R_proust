@@ -396,7 +396,7 @@ def supprimer(request,id):
     return render(request, 'digressions/mescommentaires.html',context)
 #############################################MODIFIER  UN COMMENTAIRE ATTACHE A L'UTILISATEUR NOMME (tous les commentaires de l'utilisateur sont affichés)
 
-def modifier(request,id):
+def modifierX(request,id):
 
     comment = Commentaires.objects.filter(pk=id)
 
@@ -448,7 +448,44 @@ def modifier(request,id):
 
 
 ################################@    AFFICHAGE DE TOUS LES COMMENTAIRES DE L'UTILISATEUR NOMME  ############################
+def modifier(request,id):
 
+
+    #id = l'id du commentaire à modifier
+
+    username=request.user.id
+    comment = Commentaires.objects.filter(pk=id)
+
+    for x in comment:
+
+        titreEnClair = get_object_or_404(Extraits, pk=x.titre_id) #x.titre_id represente le lien(FK) avec le titre de l'extrait present dans Extraits ('extraits_titre')
+
+    if request.method == 'POST':  # S'il s'agit d'une requête POST
+        form = CommentForm(request.POST)  # Nous reprenons les données
+
+
+        if form.is_valid(): #  données envoyées  valides ?
+##           titr=Extraits.objects.filter(pk=x.titre_id)
+##           for t in titr:
+##            print(t.id)
+ ##           Commentaires.objects.filter(id=id).delete()
+
+            p=Commentaires(id=id, author_id=username,body =form.cleaned_data['commentaires'],date=timezone.now(),titre_id=x.titre_id)
+
+
+            p.save()
+
+
+    else:
+        "Si ce n'est pas du POST, c'est probablement une requête GET"
+
+    comment = Commentaires.objects.filter(pk=id) # necessaire pour actualiser le commentaire à l'affichage
+    liste_comment = Commentaires.objects.filter(titre_id=x.titre_id).order_by('author_id','-date')
+
+    context={'titre': titreEnClair, 'commentaires':comment,'liste_comment': liste_comment}
+
+    return render(request, 'digressions/contenu.html', context)
+   
 def mescommentaires(request):
 
     comment=Commentaires.objects.filter(author_id=request.user.id).order_by ('-date')
