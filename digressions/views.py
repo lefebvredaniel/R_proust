@@ -64,6 +64,7 @@ def index(request):
     #         indice.extraits_titre=indice.extraits_titre+"***"
     dico={}
     extraits_list=Extraits.objects.annotate(nb1=Count('commentaires')).order_by('id')
+    print(extraits_list)
     for R in extraits_list:
        extraits_titre = Extraits.objects.get(id=R.id)
       
@@ -247,6 +248,7 @@ def detail(request, etiq_id):
 ## à partir de la table relation R_Extraits_...
     selection_list= R_Extraits_Etiquettes.objects.filter(etiquettes_id=etiq_id)
    
+   
 
     # for indice_lect in selection_list :
              
@@ -260,28 +262,32 @@ def detail(request, etiq_id):
     nom_etiquette = Etiquettes.objects.filter(id=etiq_id)
 
     dico={}
-    extraits_list=Extraits.objects.annotate(nb1=Count('commentaires')).order_by('id')
-    for R in extraits_list:
-       extraits_titre = Extraits.objects.get(id=R.id)
-      
-       nbOccurs=str(R.nb1)
-      
-       dico[extraits_titre]='('+nbOccurs+')'
     
+    for R in selection_list:
+       # extraits_list=Extraits.objects.get(id=28)
+       extraits_titre = Extraits.objects.annotate(nb1=Count('commentaires')).get(id=R.extraits_id_id)
+       print(extraits_titre)
+       # print(R.nb1)
+      
+       # # nbOccurs=str(R.nb1)
+       # nbOccurs=str(R.nb1)
+      
+       # dico[extraits_titre]='('+nbOccurs+')'
+   
     # context = {'titre_list':titre_list}
-    context={'dictionnaire':dico}
+    # context={'etiquettes_list':dico}
 
-    return render(request, 'digressions/index.html', context)
+    # return render(request, 'digressions/detail.html', context)
 
 ##    dico_tit={}
 ##    for t in selection_list:
 ##        titre=t.extraits_id
 ##        y=t.extraits_id_id
 ##        z=R_Extraits_Etiquettes.objects.filter(extraits_id_id=y).values()
-    # context={'etiquettes_list':dico,'nom_etiquette':nom_etiquette}
+    context={'etiquettes_list':selection_list,'nom_etiquette':nom_etiquette}
     
-    # return render(request, 'digressions/detail.html',context)
-
+    return render(request, 'digressions/detail.html',context)
+#
 ####################################################AFFICHAGE DE L'EXTRAIT D'UN TITRE ET DES COOMENTAIRES QUI LUI SONT RATTACHES   ###########
 
 def contenu(request, titre_id):
