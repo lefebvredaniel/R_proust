@@ -13,7 +13,7 @@
         <div class="text-primary">
             <h3>
                 classement par titre d'extraits</h3>
-            <h6 style="font-family: arial;font-size:110%;font-style: italic;color:bisque"> Les astérisques indiquent que l'extrait est commenté : cliquez sur le mot pour faire apparâitre le commentaire</h6>
+            <h6 style="font-family: arial;font-size:110%;font-style: italic;color:bisque"> le nombre entre parenthèses indique le nombre de commentaires associés à l'extrait</h6>
 
         </div>
     </div>
@@ -27,15 +27,15 @@
 
 
 
-    {% if titre_list %}
+    {% if dictionnaire %}
     <ul class="list-unstyled">
-        {% for t in titre_list %}
+        {% for t , value in dictionnaire.items %}
 
 
 
 
         <li>
-            <a href="/{{t.id}}/contenu"> {{t}} 
+            <a href="/{{t.id}}/contenu"> {{t}} {{value}}
 
 
             </a>

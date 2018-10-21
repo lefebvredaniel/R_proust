@@ -40,7 +40,7 @@ def index(request):
 
 #On affiche toutes les étiquettes en les classant par fréquence (le comptage se fait avec la table relation R_Extraits_Etiquettes) puis par ordre alphabétique
 
-    titre_list=Extraits.objects.all()
+    # titre_list=Extraits.objects.all()
 
 
     # titre_liste={}
@@ -57,22 +57,22 @@ def index(request):
     #     titre_liste[tit.extraits_id_id]=tit.extraits_id 
     #     print(tit.extraits_titre)
 
-            
-    for indice in titre_list:
-        if Commentaires.objects.filter(titre_id=indice.id):
-            indice.extraits_titre=indice.extraits_titre+"***"
-           
-
-
-
-
-
-
-
-    context = {'titre_list':titre_list}
+   
+          
+    # for indice in titre_list:
+    #     if Commentaires.objects.filter(titre_id=indice.id):
+    #         indice.extraits_titre=indice.extraits_titre+"***"
+    dico={}
+    extraits_list=Extraits.objects.annotate(nb1=Count('commentaires')).order_by('id')
+    for R in extraits_list:
+       extraits_titre = Extraits.objects.get(id=R.id)
+      
+       nbOccurs=str(R.nb1)
+      
+       dico[extraits_titre]='('+nbOccurs+')'
     
-
-
+    # context = {'titre_list':titre_list}
+    context={'dictionnaire':dico}
 
     return render(request, 'digressions/index.html', context)
 ##                              PAGE CONTENU (extrait)
@@ -82,12 +82,7 @@ def apropos(request):
 
 def poursyretrouver(request):
 
-    
-
     etiquettes_list=Etiquettes.objects.annotate(nb=Count('r_extraits_etiquettes')).order_by('etiquettes_nom')
-    
-   
-    
 
     PL=''
     dico={}
@@ -102,9 +97,6 @@ def poursyretrouver(request):
             A=str(nomEtiquette[0])
 
             dico[A.upper]=''
-
-
-
 
     ##on ajoute au dictionnaire "dico" le nombre d'occurrences de l'étiquette uneEtiquette {<Etiquettes: songe>: 1, <Etiquettes: jalousie>: 1,
     ##      <Etiquettes: amour>: 2 etc.}
@@ -256,34 +248,39 @@ def detail(request, etiq_id):
     selection_list= R_Extraits_Etiquettes.objects.filter(etiquettes_id=etiq_id)
    
 
-    for indice_lect in selection_list :
-        
-       
-        
-        if Commentaires.objects.filter(titre_id=indice_lect.extraits_id):
-            
-        
-        
-        
-            indice_lect.extraits_id.extraits_titre =indice_lect.extraits_id.extraits_titre+"***"
+    # for indice_lect in selection_list :
+             
+    #     if Commentaires.objects.filter(titre_id=indice_lect.extraits_id):
+              
+    #         indice_lect.extraits_id.extraits_titre =indice_lect.extraits_id.extraits_titre+"***"
    
    
     
    ## selection du nom de l'étiquette sélectionnée (transmise par son id)
-    nom_etiquette = Etiquettes.objects.filter(id=etiq_id) 
+    nom_etiquette = Etiquettes.objects.filter(id=etiq_id)
 
+    dico={}
+    extraits_list=Extraits.objects.annotate(nb1=Count('commentaires')).order_by('id')
+    for R in extraits_list:
+       extraits_titre = Extraits.objects.get(id=R.id)
+      
+       nbOccurs=str(R.nb1)
+      
+       dico[extraits_titre]='('+nbOccurs+')'
+    
+    # context = {'titre_list':titre_list}
+    context={'dictionnaire':dico}
+
+    return render(request, 'digressions/index.html', context)
 
 ##    dico_tit={}
 ##    for t in selection_list:
 ##        titre=t.extraits_id
 ##        y=t.extraits_id_id
 ##        z=R_Extraits_Etiquettes.objects.filter(extraits_id_id=y).values()
-##
-##
+    # context={'etiquettes_list':dico,'nom_etiquette':nom_etiquette}
     
-    context={'etiquettes_list':selection_list,'nom_etiquette':nom_etiquette}
-    
-    return render(request, 'digressions/detail.html',context)
+    # return render(request, 'digressions/detail.html',context)
 
 ####################################################AFFICHAGE DE L'EXTRAIT D'UN TITRE ET DES COOMENTAIRES QUI LUI SONT RATTACHES   ###########
 
@@ -485,7 +482,7 @@ def modifier(request,id):
     context={'titre': titreEnClair, 'commentaires':comment,'liste_comment': liste_comment}
 
     return render(request, 'digressions/contenu.html', context)
-   
+
 def mescommentaires(request):
 
     comment=Commentaires.objects.filter(author_id=request.user.id).order_by ('-date')
