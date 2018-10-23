@@ -115,7 +115,7 @@
 
         </div>
         <nav class="navbar navbar-inverse">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
                 </div>
                 <ul class="nav navbar-nav">
@@ -130,30 +130,26 @@
                     <li>
                         <a href="{% url 'logout' %}">déconnexion</a></li>
                     <li><a href="/mescommentaires"> mes commentaires</a></li>
-
-
-
                     {% else %}
-
                     <li><a href="/accounts/login">se connecter <span> Se connecter permet d'écrire des commentaires; login non publié </span>
           </a></li>
-
-
                     {% endif %}
 
+
+
+
+                    <form class="navbar-form navbar-right" action="/recherche" method="POST">
+                        <div class="form-group">
+
+
+                            <p> <input type="text" class="form-control" name="mot" placeholder="mot recherché">
+
+                                <input type="submit"></p>
+
+                            {% csrf_token %}
+                        </div>
+                    </form>
                 </ul>
-
-                <form class="navbar-form navbar-right" action="/recherche" method="POST">
-                    <div class="form-group">
-
-
-                        <p> <input type="text" class="form-control" name="mot" placeholder="mot recherché">
-
-                            <input type="submit"></p>
-
-                        {% csrf_token %}
-                    </div>
-                </form>
             </div>
         </nav>
     </div>
