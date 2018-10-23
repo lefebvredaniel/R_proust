@@ -64,7 +64,7 @@ def index(request):
     #         indice.extraits_titre=indice.extraits_titre+"***"
     dico={}
     extraits_list=Extraits.objects.annotate(nb1=Count('commentaires')).order_by('id')
-    print(extraits_list)
+
     for R in extraits_list:
        extraits_titre = Extraits.objects.get(id=R.id)
       
@@ -244,12 +244,6 @@ def detail(request, etiq_id):
     
     
 
-##extraction de toutes les lignes qui ont l'étiquette sélectionnée dans l'écran précédent (etiq_id)
-## à partir de la table relation R_Extraits_...
-    selection_list= R_Extraits_Etiquettes.objects.filter(etiquettes_id=etiq_id)
-   
-   
-
     # for indice_lect in selection_list :
              
     #     if Commentaires.objects.filter(titre_id=indice_lect.extraits_id):
@@ -261,21 +255,28 @@ def detail(request, etiq_id):
    ## selection du nom de l'étiquette sélectionnée (transmise par son id)
     nom_etiquette = Etiquettes.objects.filter(id=etiq_id)
 
-    dico={}
-    
+##extraction de toutes les lignes qui ont l'étiquette sélectionnée dans l'écran précédent (etiq_id)
+## à partir de la table relation R_Extraits_...
+    selection_list= R_Extraits_Etiquettes.objects.filter(etiquettes_id=etiq_id)
+   
+    dico_nb={}
+   
+  
     for R in selection_list:
        # extraits_list=Extraits.objects.get(id=28)
-       extraits_titre = Extraits.objects.annotate(nb1=Count('commentaires')).get(id=R.extraits_id_id)
-       print(extraits_titre)
-       # print(R.nb1)
-      
-       # # nbOccurs=str(R.nb1)
-       # nbOccurs=str(R.nb1)
-      
-       # dico[extraits_titre]='('+nbOccurs+')'
-   
-    # context = {'titre_list':titre_list}
-    # context={'etiquettes_list':dico}
+       extraits_titre = Extraits.objects.annotate(nb2=Count('commentaires')).get(id=R.extraits_id_id)
+       print(extraits_titre.nb2)
+       # print(extraits_titre.nb2)
+       nbOccurs=str(extraits_titre.nb2)
+       R.extraits_id.extraits_titre =R.extraits_id.extraits_titre + ' ('+nbOccurs+')'
+       
+       # I=str(i)
+       # nbOccurs=str(extraits_titre.commentaires_count)
+       # # 
+       # # R.extraits_titre = R.extraits_id_id +'('+nbOccurs+')'
+       # dico_nb[I]=[nbOccurs]
+       # i=i+1
+    
 
     # return render(request, 'digressions/detail.html', context)
 
@@ -284,7 +285,8 @@ def detail(request, etiq_id):
 ##        titre=t.extraits_id
 ##        y=t.extraits_id_id
 ##        z=R_Extraits_Etiquettes.objects.filter(extraits_id_id=y).values()
-    context={'etiquettes_list':selection_list,'nom_etiquette':nom_etiquette}
+    context={'dico':selection_list,'nom_etiquette':nom_etiquette}
+    print(context)
     
     return render(request, 'digressions/detail.html',context)
 #

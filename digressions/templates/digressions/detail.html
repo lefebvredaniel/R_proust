@@ -4,7 +4,7 @@
     <div class="text-center">
         <div class="text-primary">
             <h2>Extraits pour le mot-clé.....{{nom_etiq}}</h2>
-            <!--            <h6 style="font-family: arial;font-size:110%;font-style: italic;color:bisque"> le nombre entre parenthèses indique le nombre de commentaires associés à l'extrait</h6>-->
+            <h6 style="font-family: arial;font-size:110%;font-style: italic;color:bisque"> le nombre entre parenthèses indique le nombre de commentaires associés à l'extrait</h6>
         </div>
     </div>
 </div>
@@ -16,20 +16,34 @@
     var i = 0;
 
 </script>
-{% if etiquettes_list %} {% for etiq in etiquettes_list %}
+{% if dico %} {% for t in dico%}
 <ul class="list-unstyled">
 
-    <h4><a href="/{{etiq.extraits_id.id}}/contenu">{{etiq.extraits_id.extraits_titre }} <span> Cliquer pour accéder<br> aux commentaires </span> </a></h4>{{etiq.extraits_id.extraits_livre}}
+
+    <h4><a href="/{{t.extraits_id.id}}/contenu">{{t.extraits_id.extraits_titre}}  <span> Cliquer pour accéder<br> aux commentaires </span> </a></h4>{{t.extraits_id.extraits_livre}}
 
     <div class="jumbotron">
         <li>
-            <p style="font-family:arial,sans-serif;font-size:100%;color:brown;" class="JS_rech_comme">{{ etiq.extraits_id.extraits_content}} </p>
+            <p style="font-family:arial,sans-serif;font-size:100%;color:brown;" class="JS_rech_comme">{{t.extraits_id.extraits_content}} </p>
         </li>
 
     </div>
 </ul>
-
 {% endfor %}
+<!--{% for x in extraits %}
+<ul class="list-unstyled">
+
+
+    <h4><a href="/{{x.id}}/contenu">{{x.extraits_titre}}  {{x.nb1}} <span> Cliquer pour accéder<br> aux commentaires </span> </a></h4>{{x.extraits_livre}}
+
+    <div class="jumbotron">
+        <li>
+            <p style="font-family:arial,sans-serif;font-size:100%;color:brown;" class="JS_rech_comme">{{x.extraits_content}} </p>
+        </li>
+
+    </div>
+</ul>-->
+<!--{% endfor %}-->
 
 <script type="text/javascript">
     for (i = 0; i < 50; i++) {
