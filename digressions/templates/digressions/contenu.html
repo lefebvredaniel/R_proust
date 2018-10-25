@@ -1,123 +1,104 @@
-
-
 <head>
-{% extends 'digressions/base.html' %}
-{% block content %}
-<style>
-input {color:black;}
-div.ex1 {
-    max-width:1000px;
-    margin: auto;
-    border: 3px black;
+    {% extends 'digressions/base.html' %} {% block content %}
+    <style>
+        input {
+            color: black;
+        }
 
-}
-</style>
+        div.ex1 {
+            max-width: 1000px;
+            margin: auto;
+            border: 3px black;
+
+        }
+
+    </style>
 
 </head>
 
 <body>
 
-<div class="text-center">
-		<div class="text-primary">	
-			<h2><a href="/{{titre.id}}/contenu">Commentaires sur...{{titre.extraits_titre}} </a></h2>
-		</div>
-</div>
-           
- <p style="font-family:arial,sans-serif;font-size:115%;color:navy;background: Bisque" id="rempl.comme">{{ titre.extraits_content}} </p><br>
+    <div class="text-center">
+        <div class="text-primary">
+            <h2><a href="/{{titre.id}}/contenu">Commentaires sur...{{titre.extraits_titre}} </a></h2>
+        </div>
+    </div>
+    {{titre.extraits_livre}}
 
-	<!--  <p id="demo">{{titre.extraits_content}}</p> -->
-	<script type="text/javascript">
+    <p style="font-family:arial,sans-serif;font-size:115%;color:navy;background: Bisque" id="rempl.comme">{{ titre.extraits_content}} </p><br>
 
-	 var str = document.getElementById("rempl.comme").innerHTML; 
-    var txt = str.replace("comme ","COMME ");
-    document.getElementById("rempl.comme").innerHTML = txt;
+    <!--  <p id="demo">{{titre.extraits_content}}</p> -->
+    <script type="text/javascript">
+        var str = document.getElementById("rempl.comme").innerHTML;
+        var txt = str.replace("comme ", "COMME ");
+        document.getElementById("rempl.comme").innerHTML = txt;
 
-    </script> 
+    </script>
 
-{% if user.is_authenticated %}
-	{% if commentaires %}
-	     
-		{% for c in commentaires %}
+    {% if user.is_authenticated %} {% if commentaires %} {% for c in commentaires %}
 
-   			<form action="" method="POST">
-				<P Votre commentaire sur ce texte...:<P>
-				<textarea  id="commentaires" type="textarea" name="commentaires" rows="5"  cols="120"> {{c.body}} </textarea>
-				<input type="submit"> modification prise en compte ( {{c.date}})
-    			{% csrf_token %}
-			</form>
+    <form action="" method="POST">
+        <P Votre commentaire sur ce texte...:<P>
+            <textarea id="commentaires" type="textarea" name="commentaires" rows="5" cols="120"> {{c.body}} </textarea>
+            <input type="submit"> modification prise en compte ( {{c.date}}) {% csrf_token %}
+    </form>
 
-		{% endfor %}
-	
-	{% else %}
-		<form action="" method="POST">
-			Votre commentaire sur ce texte...:<P>
-			<textarea  id="commentaires" type="textarea" name="commentaires" rows="5" cols="120">  </textarea>
-			<input type="submit" >
-    		{% csrf_token %}
+    {% endfor %} {% else %}
+    <form action="" method="POST">
+        Votre commentaire sur ce texte...:
+        <P>
+            <textarea id="commentaires" type="textarea" name="commentaires" rows="5" cols="120">  </textarea>
+            <input type="submit"> {% csrf_token %}
 
-		</form>
+    </form>
 
-        
- 	{% endif %}  
-{% endif %}  
-    
 
-{% if liste_comment %}
+    {% endif %} {% endif %} {% if liste_comment %} {% for d in liste_comment %}
+    <br>
+    <div class="ex1">
+        <ul class="list-unstyled">
+            <p> le {{d.date}} {% if user.id == d.author_id %} {{d.author}} {% else %} un visiteur </p>
 
-	{% for d in liste_comment %}
-		<br>
-	 <div class="ex1"> 
-		<ul class="list-unstyled">
-			<p> le  {{d.date}}  
-		  
-		  		{% if user.id == d.author_id  %}
-		  		{{d.author}}
+            {% endif %}
 
-		  		{% else %}
-		  			un visiteur </p>
+            <li>
+                <p style="font-family:verdana;font-size:100%;color:brown;">{{d.body}} </p>
+            </li>
+        </ul>
+    </div>
 
-		  		{% endif %}
+    {% if user.id == d.author_id %}
 
-		  	<li><p style="font-family:verdana;font-size:100%;color:brown;">{{d.body}} </p></li> 
-		</ul>
-	</div>
+    <div class="container">
+        <div class="row">
 
-		{% if user.id == d.author_id %}
+            <div class="col-lg-2">
+                <a href="/{{d.id}}/mescommentaires/amodifier1" class="btn btn-primary btn-sm " role="button">Modification</a>
+            </div>
 
-			<div class="container">
-  				<div class="row">
-    
-    				<div class="col-lg-2">
-      					<a href="/{{d.id}}/mescommentaires/amodifier1" class="btn btn-primary btn-sm " role="button" >Modification</a>
-    				</div>
+            <div class="col-lg-2"></div>
 
-    				<div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"> </div>
 
-    				<div class="col-lg-2"></div>
-    				<div class="col-lg-2"></div>
-    				<div class="col-lg-2"> </div>
-    
-    				<div class="col-lg-2">
-						<a href="/{{d.id}}/{{d.titre_id}}/mescommentaires/asupprimer1" class="btn btn-danger btn-sm " role="button" >Suppression</a>
-      
-    				</div>
-  				 </div>
-			</div>	
-		{% endif %}
+            <div class="col-lg-2">
+                <a href="/{{d.id}}/{{d.titre_id}}/mescommentaires/asupprimer1" class="btn btn-danger btn-sm " role="button">Suppression</a>
 
-	{% endfor %}
-{% else %}
-	
+            </div>
+        </div>
+    </div>
+    {% endif %} {% endfor %} {% else %}
 
-    	<h5> Pas encore de commentaires </h5>
 
-   
+    <h5> Pas encore de commentaires </h5>
 
-{% endif %}
+
+
+    {% endif %}
 
 </body>
+
 </html>
 
- {% endblock %}
-
- 
+{% endblock %}

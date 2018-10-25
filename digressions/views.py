@@ -63,16 +63,17 @@ def index(request):
     #     if Commentaires.objects.filter(titre_id=indice.id):
     #         indice.extraits_titre=indice.extraits_titre+"***"
     dico={}
-    extraits_list=Extraits.objects.annotate(nb1=Count('commentaires')).order_by('id')
+    # extraits_list=Extraits.objects.annotate(nb1=Count('commentaires'))
 
-    for R in extraits_list:
-       extraits_titre = Extraits.objects.get(id=R.id)
+    for R in Extraits.objects.prefetch_related ('extraits_livre').annotate(nb1=Count('commentaires')):
+
+        extraits_titre = Extraits.objects.get(id=R.id)
       
-       nbOccurs=str(R.nb1)
+        nbOccurs=str(R.nb1)
       
-       dico[extraits_titre]='('+nbOccurs+')'
+        dico[extraits_titre]='('+nbOccurs+')'
     
-    # context = {'titre_list':titre_list}
+    
     context={'dictionnaire':dico}
 
     return render(request, 'digressions/index.html', context)
@@ -265,7 +266,7 @@ def detail(request, etiq_id):
     for R in selection_list:
        # extraits_list=Extraits.objects.get(id=28)
        extraits_titre = Extraits.objects.annotate(nb2=Count('commentaires')).get(id=R.extraits_id_id)
-       print(extraits_titre.nb2)
+       
        # print(extraits_titre.nb2)
        nbOccurs=str(extraits_titre.nb2)
        R.extraits_id.extraits_titre =R.extraits_id.extraits_titre + ' ('+nbOccurs+')'
@@ -286,7 +287,7 @@ def detail(request, etiq_id):
 ##        y=t.extraits_id_id
 ##        z=R_Extraits_Etiquettes.objects.filter(extraits_id_id=y).values()
     context={'dico':selection_list,'nom_etiquette':nom_etiquette}
-    print(context)
+   
     
     return render(request, 'digressions/detail.html',context)
 #

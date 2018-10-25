@@ -18,13 +18,21 @@ class LivreAdmin(admin.ModelAdmin):
  
     
 class ExtraitsAdmin(admin.ModelAdmin):
-  
+
+  	
 
     fields=['extraits_content','extraits_titre','pub_date', 'extraits_livre']
+    
+    search_fields =['extraits_content']
  
 
     inlines = [ChoixEtiquettes]
     InlineModelAdmin=[LivreAdmin]
+
+# class SearchModel(admin.ModelAdmin):
+	
+	
+#     search_fields=['extraits_content']
 
 class CommentairesAdmin(admin.ModelAdmin):
     model= Commentaires
@@ -35,7 +43,8 @@ class CommentairesAdmin(admin.ModelAdmin):
 admin.site.register(Extraits, ExtraitsAdmin)
 admin.site.register(Etiquettes)
 admin.site.register(Commentaires)
-admin.site.register(Livre)
+admin.site.register(Livre) 
+# admin.site.register(SearchModel)
 
 
 # Register your models here.
